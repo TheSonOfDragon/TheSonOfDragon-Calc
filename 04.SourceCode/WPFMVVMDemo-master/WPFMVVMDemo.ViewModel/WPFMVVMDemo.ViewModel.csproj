@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddComma.cs" />
     <Compile Include="FactoryNumber\Dot.cs" />
     <Compile Include="Equals.cs" />
     <Compile Include="IJudge\JudgeForSingle.cs" />
@@ -66,10 +67,10 @@
     <Compile Include="MainWindowsViewModel.cs" />
     <Compile Include="FactoryNumber\NumberOneToNine.cs" />
     <Compile Include="FactoryNumber\NumberZero.cs" />
-    <Compile Include="FactorySYmbol\AddOperator.cs" />
+    <Compile Include="FactorySymbol\AddOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FactorySYmbol\AddSingle.cs" />
-    <Compile Include="FactorySYmbol\AddSymbol.cs" />
+    <Compile Include="FactorySymbol\AddSingle.cs" />
+    <Compile Include="FactorySymbol\AddSymbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

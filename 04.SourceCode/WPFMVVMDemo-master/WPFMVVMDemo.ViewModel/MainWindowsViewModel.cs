@@ -18,7 +18,7 @@ namespace WPFMVVMDemo.ViewModel
     public class MainWindowsViewModel : NotifyObject
     {
         public static String _disPlayTextUnder="0";
-        public static string _disPlayTextTop = "";     
+        public static string _disPlayTextTop = "0";     
         
         //指当前输出屏幕的所有内容 
 
@@ -336,8 +336,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.underCache = "";
             DisPlayTextTop = "";
             DisPlayTextUnder = "0";
-            Cache.operatorCacheOld = "0";
-            Cache.operatorCacheNow = "0";
+            Cache.operatorCacheOld = "";
             Cache.judgeNewInp = false;
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;

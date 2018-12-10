@@ -25,7 +25,7 @@ namespace WPFMVVMDemo.ViewModel
                     Cache.underCache = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
                     break;
                 case "÷":
-                    Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache);
+                    Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache).ToString();
                     break;
             }
                     return Cache.underCache;

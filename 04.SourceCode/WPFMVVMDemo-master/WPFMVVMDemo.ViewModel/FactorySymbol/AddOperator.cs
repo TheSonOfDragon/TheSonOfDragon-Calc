@@ -10,68 +10,69 @@ using Operation;
 
 namespace WPFMVVMDemo.ViewModel.Symbol
 {
+    //添加加减乘除符号，并附带运算
     class AddOperator : IJudge.JudgeOperator
     {
         Basic_Opreation bo = new Basic_Opreation();
         public string JudgeOperator(string opt)
         {
-            if ("0".Equals(Cache.operatorCacheNow))
+            Cache.underCache = "";
+            if (MainWindowsViewModel._disPlayTextTop == "")
             {
-                
-                Cache.operatorCacheNow = opt;
-                if(Cache.operatorCacheOld!="")
+                if (Cache.operatorCacheOld == "")
                 {
-                    if (Cache.underCache == "")
-                    {
-                        Cache.topCache += MainWindowsViewModel._disPlayTextUnder + Cache.operatorCacheNow;
-                        Cache.resultCache = Cache.underCache;
-                    }
-                    else
-                    {
-                    Cache.topCache += Cache.underCache + Cache.operatorCacheNow;
-
-                    }
+                    Cache.operatorCacheOld = opt;
+                    Cache.topCache = 0 + Cache.operatorCacheOld;
                 }
                 else
                 {
-                    if (Cache.underCache == "")
-                    {
-                        Cache.topCache = "0" + Cache.operatorCacheNow;
-                    }
-                    else
-                    {
-
-                Cache.topCache = Cache.underCache + Cache.operatorCacheNow;
-                    }
+                    Cache.operatorCacheOld = opt;
+                    Cache.topCache = "";
+                    Cache.topCache = 0 + Cache.operatorCacheOld;
                 }
-                switch (Cache.operatorCacheOld)
-                {
-                    case "+":
-                        Cache.underCache = bo.Add(Cache.resultCache, Cache.underCache).ToString();
-                        break;
-                    case "-":
-                        Cache.underCache = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
-                        break;
-                    case "×":
-                        Cache.underCache = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
-                        break;
-                    case "÷":
-                        Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache);
-                        break;
-                }
-                Cache.judgeNewInp = true;
-                Cache.judgeSinge = true;
                 return Cache.topCache;
             }
             else
             {
-
-                Cache.operatorCacheNow = opt;
-                Cache.judgeSinge = true;
-                Cache.topCache = Cache.topCache.Substring(0,Cache.topCache.Length-1) + Cache.operatorCacheNow;
-            return Cache.topCache;
-            }
+                string x = MainWindowsViewModel._disPlayTextTop;
+                Cache.operatorCacheOld = opt;
+                if(x.Last().ToString()=="+"|| x.Last().ToString() == "-"|| x.Last().ToString() == "×"|| x.Last().ToString() == "÷")
+                {
+                    //最后一位是运算符，即不是第一次输入
+                    Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length - 2) + Cache.operatorCacheOld;
+                    if (Cache.resultCache == "")
+                    {
+                        Cache.resultCache = 0 + Cache.underCache;
+                    }
+                    else
+                    {
+                    switch (x.Last().ToString())
+                    {
+                        case "+":
+                            Cache.underCache = bo.Add(Cache.resultCache, Cache.underCache).ToString();
+                                Cache.resultCache = Cache.underCache;
+                            break;
+                        case "-":
+                            Cache.underCache = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
+                                Cache.resultCache = Cache.underCache;
+                                break;
+                        case "×":
+                            Cache.underCache = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
+                                Cache.resultCache = Cache.underCache;
+                                break;
+                        case "÷":
+                            Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache).ToString();
+                                Cache.resultCache = Cache.underCache;
+                                break;
+                    }
+                    }
+                }
+                else
+                {
+                    Cache.topCache += Cache.underCache + opt;
+                }
+                return Cache.underCache;
             }
         }
-    
+    }
 }

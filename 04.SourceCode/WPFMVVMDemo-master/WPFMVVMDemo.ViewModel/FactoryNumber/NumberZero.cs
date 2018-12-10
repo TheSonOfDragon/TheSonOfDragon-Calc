@@ -11,24 +11,14 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
     {
         public string JudgeZero()
         {
-            if (Cache.operatorCacheNow != "0")
+            if (Cache.underCache == "")
             {
-                Cache.operatorCacheOld = Cache.operatorCacheNow;
-            }
-            Cache.operatorCacheNow = "0";
-            if (Cache.judgeNewInp)
-            {
-                Cache.underCache = "";
-                Cache.judgeNewInp = false;
-            }
-            if ("".Equals(Cache.underCache) || "0".Equals(Cache.underCache))
-            {
-                Cache.underCache = "";
-                return "0";
+                Cache.underCache = "0";
+                return Cache.underCache;
             }
             else
             {
-                Cache.underCache += "0";
+                Cache.underCache += 0;
                 return Cache.underCache;
             }
         }

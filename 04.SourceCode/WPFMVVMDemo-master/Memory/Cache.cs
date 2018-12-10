@@ -14,9 +14,7 @@ namespace Memory
         //缓存底部栏内容
         public static string underCache = "";
         //缓存上一个符号 
-        public static string operatorCacheOld = "0";
-        //缓存当前符号 
-        public static string operatorCacheNow = "0";
+        public static string operatorCacheOld = "";
         //缓存上一次结果
         public static string resultCache = "0";
         //判断是否为新新入

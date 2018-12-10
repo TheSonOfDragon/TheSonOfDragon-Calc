@@ -27,20 +27,18 @@ namespace Operation
             
             return Convert.ToDecimal(num1) * Convert.ToDecimal(num2);
         }
-        public string Div(string num1, string num2)
+        public decimal Div(string num1, string num2)
         {
             
 
             if (num2 == "0")
             {
-                return "除数不能为零";
+                Cache.topCache = "除数不能为零";
 
             }
-            else
-            {
-                return (Convert.ToDecimal(num1) / Convert.ToDecimal(num2)).ToString();
+                return Convert.ToDecimal(num1) / Convert.ToDecimal(num2);
 
-            }
+            
         }
     }
 }

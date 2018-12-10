@@ -10,25 +10,22 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 {
     public class AddSymbol
     {
-      private  bool flag = true;
+        //正负号，对Cache.underCache的值无变化，只改变大小
+        private bool flag = true;
         public string GetSymbol()
         {
-            
-                if (flag)
-                {
-                    flag = false;
-                    Cache.underCache = "-" + Cache.underCache;
-                    return Cache.underCache;
-
-                }
-                else
-                {
-                    flag = true;
-                double value = Convert.ToDouble(Cache.underCache);
-                    Cache.underCache = System.Math.Abs(value).ToString();
-                    return Cache.underCache;
-                }
+            if (flag)
+            {
+                Cache.underCache = "-" + Cache.underCache;
+                flag = false;
+                return Cache.underCache;
             }
+            else
+            {
+                Cache.underCache = Cache.underCache.Substring(1, Cache.underCache.Length - 1);
+                return Cache.underCache;
             }
-        
+        }
     }
+}
+
