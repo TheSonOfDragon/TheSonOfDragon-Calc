@@ -17,7 +17,7 @@ namespace WPFMVVMDemo.ViewModel
 {
     public class MainWindowsViewModel : NotifyObject
     {
-        public static String _disPlayTextUnder="0";
+        public static string _disPlayTextUnder="0";
         public static string _disPlayTextTop = "";     
         
         //指当前输出屏幕的所有内容 
@@ -236,76 +236,76 @@ namespace WPFMVVMDemo.ViewModel
         private void AddHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("+");
-            DisPlayTextUnder = Cache.underCache;
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache) ;
         }
         
         private void SubtractHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("-");
-            DisPlayTextUnder = Cache.underCache;
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
         }
         
         private void MultiplyHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("×");
-            DisPlayTextUnder = Cache.underCache;
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
         }
 
         private void DivideHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("÷");
-            DisPlayTextUnder = Cache.underCache;
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
         }
 
         //添加添加0-9数字的方法
         private void Num1Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("1");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("1"))  ;
             //Console.WriteLine(_disPlayTextUnder);
 
         }
         private void Num2Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("2");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("2"))  ;
         }
         private void Num3Handler()
         {
 
-            DisPlayTextUnder = addNum.Judgefornumber("3");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("3"))  ;
 
         }
         private void Num4Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("4");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("4"))  ;
 
         }
         private void Num5Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("5");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("5"))  ;
         }
         private void Num6Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("6");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("6"))  ;
 
         }
         private void Num7Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("7");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("7"))  ;
 
         }
         private void Num8Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("8");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("8"))  ;
 
         }
         private void Num9Handler()
         {
-            DisPlayTextUnder = addNum.Judgefornumber("9");
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("9"))  ;
 
         }
         private void Num0Handler()
         {
-            DisPlayTextUnder = addNum0.JudgeZero();
+            DisPlayTextUnder = AddComma.Addcomma(addNum0.JudgeZero())  ;
         }
         private void PercentOneHandler()//%
         {
@@ -337,10 +337,11 @@ namespace WPFMVVMDemo.ViewModel
             DisPlayTextTop = "";
             DisPlayTextUnder = "0";
             Cache.operatorCacheOld = "";
+            Cache.operatorCacheNew = "";
+            Cache.resultCache = "";
             Cache.judgeNewInp = false;
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;
-            Cache.resultCache = "0";
 
         }
         private void ClearPreHandler()
@@ -350,10 +351,10 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void DelHandler()
         {
-            if (DisPlayTextUnder.Length > 1)
+            if (Cache.underCache.Length > 1)
             {
-            Cache.underCache = DisPlayTextUnder.Substring(0, DisPlayTextUnder.Length - 1);
-                DisPlayTextUnder = Cache.underCache;
+            Cache.underCache = Cache.underCache.Substring(0, Cache.underCache.Length - 1);
+                DisPlayTextUnder =AddComma.Addcomma(Cache.underCache) ;
             }
             else
             {

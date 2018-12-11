@@ -16,25 +16,29 @@ namespace WPFMVVMDemo.ViewModel.Symbol
         Basic_Opreation bo = new Basic_Opreation();
         public string JudgeOperator(string opt)
         {
-            if (Cache.operatorCacheOld == ""&&Cache.underCache=="")
+            Cache.judgeNewInp = true;//输入符号后，数字肯定是新输入
+            // if else判断
+            #region
+            if (Cache.operatorCacheOld == ""&&Cache.underCache=="")//开始直接输入加减乘除
             {
                 
                     Cache.operatorCacheNew = opt;
                     Cache.topCache = 0 + opt;
                     Cache.underCache = "0";
-                Cache.judgeNewInp = true;
-                return Cache.topCache;
+
             }
-            else
+            else//不是直接输入加减乘除
             {
-                if (Cache.judgeTurn)//四则运算符是否是新输入
+                Cache.operatorCacheNew = opt;
+                if (Cache.judgeTurn)//四则运算符加减乘除是是新输入 同时进行运算
                 {
-                Cache.topCache += Cache.underCache;
+                    Cache.judgeTurn = false;
+                Cache.topCache += Cache.underCache + opt;
                     if (Cache.resultCache == "")
                     { 
                         Cache.resultCache = 0 + Cache.underCache;
                     }
-                        //新输入一个符号
+                        //新输入一个符号后的运算，只走一次
                             switch (Cache.operatorCacheOld)
                             {
                                 case "+":
@@ -55,26 +59,15 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                     break;
                             }
                 }
+                else//不是新输入符号
+                {
                 Cache.operatorCacheNew = opt;
-                string x = Cache.topCache;
-                if (x != "")
-                {
-                if("+".Equals(x.Last().ToString())|| "-".Equals(x.Last().ToString()) || "×".Equals(x.Last().ToString()) || "÷".Equals(x.Last().ToString()))
-                {
-                    //最后一位是运算符，即不是第一次输入
-                    Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length -1) + opt;
-                    
-                }
-
-                else
-                {
-                    Cache.topCache +=opt;
+                    Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length - 1) + opt;
                 }
                 }
+#endregion
+            return Cache.topCache;
             }
-                    Cache.judgeTurn = false;
-                Cache.judgeNewInp = true;
-                return Cache.topCache;
+
         }
     }
-}

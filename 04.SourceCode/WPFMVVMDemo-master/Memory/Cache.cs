@@ -18,7 +18,7 @@ namespace Memory
         //缓存最新的符号 
         public static string operatorCacheNew = "";
         //缓存上一次结果
-        public static string resultCache = "0";
+        public static string resultCache = "";
         //判断是否为新新入
         public static bool judgeNewInp = false;
         //四则运算符是否是新输入

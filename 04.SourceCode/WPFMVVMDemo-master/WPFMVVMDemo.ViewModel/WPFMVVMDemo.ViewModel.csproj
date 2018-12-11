@@ -56,7 +56,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddComma.cs" />
+    <Compile Include="FactoryFormat\AddComma.cs" />
+    <Compile Include="FactoryFormat\AddFormat.cs" />
     <Compile Include="FactoryNumber\Dot.cs" />
     <Compile Include="Equals.cs" />
     <Compile Include="IJudge\JudgeForSingle.cs" />

@@ -18,7 +18,7 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
             {
 
                 Cache.underCache = "";
-                    Cache.judgeNewInp = false;
+                Cache.judgeNewInp = false;
             }
             if (Cache.underCache == "0")
             {
