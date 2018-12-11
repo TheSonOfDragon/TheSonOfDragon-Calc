@@ -313,21 +313,23 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void SquareHandler()//平方
         {
-            
+            DisPlayTextTop = addSingle.JudgeForSinge("x²");
+            DisPlayTextUnder =AddComma.Addcomma(Cache.underCache) ;
         }
         private void InverseHandler()//相反数
         {
             DisPlayTextUnder = AddComma.Addcomma(addSymbol.GetSymbol()) ;
-            DisPlayTextTop = Cache.topCache;
+            DisPlayTextTop = AddComma.Addcomma(Cache.underCache);
         }
         private void ReciprocalHandler()//倒数
         {
-            
+            DisPlayTextTop = addSingle.JudgeForSinge("1/x");
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
         private void RadicalHandler()//根号
         {
             DisPlayTextTop = addSingle.JudgeForSinge("√");
-            DisPlayTextUnder = Cache.underCache;
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
 
         private void ClearAllHandler()
@@ -372,7 +374,6 @@ namespace WPFMVVMDemo.ViewModel
         {
             DisPlayTextUnder = eq.getResult();
             DisPlayTextTop = "";
-            Cache.topCache = "";
             Cache.judgeNewInp = false;
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;

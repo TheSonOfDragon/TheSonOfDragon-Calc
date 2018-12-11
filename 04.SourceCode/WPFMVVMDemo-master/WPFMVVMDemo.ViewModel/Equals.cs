@@ -10,25 +10,28 @@ namespace WPFMVVMDemo.ViewModel
 {
   public  class Equals
     {
+        string num;
         Basic_Opreation bo = new Basic_Opreation();
         public string getResult()
         {
-            switch (Cache.operatorCacheOld)
+                Cache.resultCache = MainWindowsViewModel._disPlayTextUnder;
+            switch (Cache.operatorCacheNew)
             {
                 case "+":
-                    Cache.underCache = bo.Add(Cache.resultCache, Cache.underCache).ToString();
+                    num = bo.Add(Cache.resultCache, Cache.underCache).ToString();
                     break;
                 case "-":
-                    Cache.underCache = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
+                    num = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
                     break;
                 case "×":
-                    Cache.underCache = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
+                    num = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
                     break;
                 case "÷":
-                    Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache).ToString();
+                    num = bo.Div(Cache.resultCache, Cache.underCache).ToString();
                     break;
             }
-                    return Cache.underCache;
+
+                    return num;
         }
     }
 }

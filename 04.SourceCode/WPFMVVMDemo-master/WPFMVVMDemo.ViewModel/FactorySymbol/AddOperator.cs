@@ -33,10 +33,18 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                 if (Cache.judgeTurn)//四则运算符加减乘除是是新输入 同时进行运算
                 {
                     Cache.judgeTurn = false;
+                    if (Cache.judgeSinge)
+                    {
+                        Cache.topCache += opt;
+                    }
+                    else
+                    {
                 Cache.topCache += Cache.underCache + opt;
+
+                    }
                     if (Cache.resultCache == "")
                     { 
-                        Cache.resultCache = 0 + Cache.underCache;
+                        Cache.resultCache =Cache.underCache;
                     }
                         //新输入一个符号后的运算，只走一次
                             switch (Cache.operatorCacheOld)

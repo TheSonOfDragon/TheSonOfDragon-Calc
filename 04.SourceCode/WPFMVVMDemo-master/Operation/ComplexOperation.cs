@@ -20,11 +20,11 @@ namespace Operation
         }
         public string OneCent(string num1)
         {
-            return Math.Pow(Convert.ToDouble(num1), 0.1).ToString();
+            return (1 / Convert.ToDouble(num1)).ToString();
         }
         public string Minus(string num1)
         {
-            return "\"-\"num1";
+            return (-Convert.ToDouble(num1)).ToString();
         }
     }
 }

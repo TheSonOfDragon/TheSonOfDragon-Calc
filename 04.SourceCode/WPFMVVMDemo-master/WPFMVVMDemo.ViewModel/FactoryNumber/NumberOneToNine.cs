@@ -14,7 +14,8 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
         {
             Cache.operatorCacheOld = Cache.operatorCacheNew;
             Cache.judgeTurn = true;
-            if(Cache.judgeNewInp)
+            Cache.judgeSinge = false;
+            if (Cache.judgeNewInp)
             {
 
                 Cache.underCache = "";
