@@ -31,7 +31,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                 {
                 Cache.topCache += Cache.underCache;
                     if (Cache.resultCache == "")
-                    {
+                    { 
                         Cache.resultCache = 0 + Cache.underCache;
                     }
                         //新输入一个符号
