@@ -18,7 +18,7 @@ namespace WPFMVVMDemo.ViewModel
     public class MainWindowsViewModel : NotifyObject
     {
         public static String _disPlayTextUnder="0";
-        public static string _disPlayTextTop = "0";     
+        public static string _disPlayTextTop = "";     
         
         //指当前输出屏幕的所有内容 
 

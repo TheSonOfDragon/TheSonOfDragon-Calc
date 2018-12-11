@@ -16,63 +16,65 @@ namespace WPFMVVMDemo.ViewModel.Symbol
         Basic_Opreation bo = new Basic_Opreation();
         public string JudgeOperator(string opt)
         {
-            Cache.underCache = "";
-            if (MainWindowsViewModel._disPlayTextTop == "")
+            if (Cache.operatorCacheOld == ""&&Cache.underCache=="")
             {
-                if (Cache.operatorCacheOld == "")
-                {
-                    Cache.operatorCacheOld = opt;
-                    Cache.topCache = 0 + Cache.operatorCacheOld;
-                }
-                else
-                {
-                    Cache.operatorCacheOld = opt;
-                    Cache.topCache = "";
-                    Cache.topCache = 0 + Cache.operatorCacheOld;
-                }
+                
+                    Cache.operatorCacheNew = opt;
+                    Cache.topCache = 0 + opt;
+                    Cache.underCache = "0";
+                Cache.judgeNewInp = true;
                 return Cache.topCache;
             }
             else
             {
-                string x = MainWindowsViewModel._disPlayTextTop;
-                Cache.operatorCacheOld = opt;
-                if(x.Last().ToString()=="+"|| x.Last().ToString() == "-"|| x.Last().ToString() == "×"|| x.Last().ToString() == "÷")
+                if (Cache.judgeTurn)//四则运算符是否是新输入
                 {
-                    //最后一位是运算符，即不是第一次输入
-                    Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length - 2) + Cache.operatorCacheOld;
+                Cache.topCache += Cache.underCache;
                     if (Cache.resultCache == "")
                     {
                         Cache.resultCache = 0 + Cache.underCache;
                     }
-                    else
-                    {
-                    switch (x.Last().ToString())
-                    {
-                        case "+":
-                            Cache.underCache = bo.Add(Cache.resultCache, Cache.underCache).ToString();
-                                Cache.resultCache = Cache.underCache;
-                            break;
-                        case "-":
-                            Cache.underCache = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
-                                Cache.resultCache = Cache.underCache;
-                                break;
-                        case "×":
-                            Cache.underCache = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
-                                Cache.resultCache = Cache.underCache;
-                                break;
-                        case "÷":
-                            Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache).ToString();
-                                Cache.resultCache = Cache.underCache;
-                                break;
-                    }
-                    }
+                        //新输入一个符号
+                            switch (Cache.operatorCacheOld)
+                            {
+                                case "+":
+                                    Cache.underCache = bo.Add(Cache.resultCache, Cache.underCache).ToString();
+                                    Cache.resultCache = Cache.underCache;
+                                    break;
+                                case "-":
+                                    Cache.underCache = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
+                                    Cache.resultCache = Cache.underCache;
+                                    break;
+                                case "×":
+                                    Cache.underCache = bo.Mul(Cache.resultCache, Cache.underCache).ToString();
+                                    Cache.resultCache = Cache.underCache;
+                                    break;
+                                case "÷":
+                                    Cache.underCache = bo.Div(Cache.resultCache, Cache.underCache).ToString();
+                                    Cache.resultCache = Cache.underCache;
+                                    break;
+                            }
                 }
+                Cache.operatorCacheNew = opt;
+                string x = Cache.topCache;
+                if (x != "")
+                {
+                if("+".Equals(x.Last().ToString())|| "-".Equals(x.Last().ToString()) || "×".Equals(x.Last().ToString()) || "÷".Equals(x.Last().ToString()))
+                {
+                    //最后一位是运算符，即不是第一次输入
+                    Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length -1) + opt;
+                    
+                }
+
                 else
                 {
-                    Cache.topCache += Cache.underCache + opt;
+                    Cache.topCache +=opt;
                 }
-                return Cache.underCache;
+                }
             }
+                    Cache.judgeTurn = false;
+                Cache.judgeNewInp = true;
+                return Cache.topCache;
         }
     }
 }

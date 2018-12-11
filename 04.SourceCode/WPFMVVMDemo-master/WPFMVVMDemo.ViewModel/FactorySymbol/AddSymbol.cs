@@ -23,6 +23,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
             else
             {
                 Cache.underCache = Cache.underCache.Substring(1, Cache.underCache.Length - 1);
+                flag = true;
                 return Cache.underCache;
             }
         }
