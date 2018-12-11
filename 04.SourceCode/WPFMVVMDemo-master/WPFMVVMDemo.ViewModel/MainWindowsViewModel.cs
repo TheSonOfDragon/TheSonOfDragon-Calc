@@ -17,10 +17,10 @@ namespace WPFMVVMDemo.ViewModel
 {
     public class MainWindowsViewModel : NotifyObject
     {
+        //指当前输出屏幕的所有内容 
         public static string _disPlayTextUnder="0";
         public static string _disPlayTextTop = "";     
         
-        //指当前输出屏幕的所有内容 
 
         AddNumber.NumberOneToNine addNum = new AddNumber.NumberOneToNine();
         AddNumber.NumberZero addNum0 = new AddNumber.NumberZero();
@@ -317,7 +317,7 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void InverseHandler()//相反数
         {
-            DisPlayTextUnder = addSymbol.GetSymbol();
+            DisPlayTextUnder = AddComma.Addcomma(addSymbol.GetSymbol()) ;
             DisPlayTextTop = Cache.topCache;
         }
         private void ReciprocalHandler()//倒数
@@ -326,8 +326,8 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void RadicalHandler()//根号
         {
-            DisPlayTextTop = Cache.topCache;
-            DisPlayTextUnder = addSingle.JudgeForSinge("√");
+            DisPlayTextTop = addSingle.JudgeForSinge("√");
+            DisPlayTextUnder = Cache.underCache;
         }
 
         private void ClearAllHandler()

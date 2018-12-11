@@ -11,7 +11,7 @@ namespace Memory
     {
         //缓存顶部栏内容
         public static string topCache = "";
-
+        //缓存底部栏内容
         public static string underCache = "";
         //缓存上一个符号 
         public static string operatorCacheOld = "";
