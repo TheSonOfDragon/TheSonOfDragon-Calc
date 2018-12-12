@@ -145,7 +145,68 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     }
                     break;
-
+                    case "±":
+                    if ("".Equals(Cache.underCache))
+                    {
+                        Cache.topCache = ("negate(" + "0" + ")");
+                        Cache.underCache = "0";
+                        Cache.judgeSinge = true;
+                    }
+                    else if (!Cache.judgeSinge)
+                    {
+                        if (Cache.judgeNewInp)
+                        {
+                            Cache.topCache = ("negate(" + Cache.underCache + ")");
+                            Cache.underCache = CO.Minus(Cache.underCache);
+                        }
+                        else
+                        {
+                            
+                            Cache.underCache = CO.Minus(Cache.underCache);
+                            
+                        }
+                        Cache.judgeSinge = true;
+                    }
+                    else
+                    {
+                        int index = Cache.topCache.LastIndexOf("n");
+                        string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                        Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
+                        Cache.underCache = CO.OneCent(Cache.underCache);
+                    }
+                    break;
+                    
+                    /*
+                    if (Cache.judgeNewInp)
+                    {
+                        if ("".Equals(Cache.underCache))
+                        {
+                            Cache.topCache = ("negate(" + "0" + ")");
+                            Cache.underCache = "0";
+                            Cache.judgeSinge = true;
+                        }
+                        else if (!Cache.judgeSinge)
+                        {
+                            
+                                Cache.topCache = ("negate(" + Cache.underCache + ")");
+                                Cache.underCache = CO.Minus(Cache.underCache);
+                       
+                                Cache.judgeSinge = true;
+                        }
+                        else
+                        {
+                            int index = Cache.topCache.LastIndexOf("n");
+                            string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                            Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
+                            Cache.underCache = CO.OneCent(Cache.underCache);
+                        }
+                    }
+                    else
+                    {
+                        Cache.underCache = CO.Minus(Cache.underCache);
+                    }
+                    break;
+                    */
 
             }
             return Cache.topCache;
