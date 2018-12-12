@@ -318,8 +318,8 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void InverseHandler()//相反数
         {
-            DisPlayTextUnder = AddComma.Addcomma(addSymbol.GetSymbol()) ;
-            DisPlayTextTop = AddComma.Addcomma(Cache.underCache);
+            DisPlayTextTop = addSingle.JudgeForSinge("±");
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
         private void ReciprocalHandler()//倒数
         {

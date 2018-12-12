@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFMVVMDemo.ViewModel.FactoryFormat
 {
+    //11111111
     static class AddFormat
     {
     }
