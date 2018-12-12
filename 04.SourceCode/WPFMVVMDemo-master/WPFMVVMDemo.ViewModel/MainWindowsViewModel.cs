@@ -318,8 +318,8 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void InverseHandler()//相反数
         {
-            DisPlayTextUnder = AddComma.Addcomma(addSymbol.GetSymbol()) ;
-            DisPlayTextTop = AddComma.Addcomma(Cache.underCache);
+            //DisPlayTextUnder = AddComma.Addcomma(addSymbol.GetSymbol()) ;
+            //DisPlayTextTop = AddComma.Addcomma(Cache.underCache);
         }
         private void ReciprocalHandler()//倒数
         {
@@ -351,8 +351,11 @@ namespace WPFMVVMDemo.ViewModel
             DisPlayTextUnder = "0";
             Cache.underCache = "";
         }
-        private void DelHandler()
+        private void DelHandler() //退格键 
         {
+            if(!Cache.judgeNewInp&&!Cache.judgeTurn)
+            {
+
             if (Cache.underCache.Length > 1)
             {
             Cache.underCache = Cache.underCache.Substring(0, Cache.underCache.Length - 1);
@@ -364,7 +367,8 @@ namespace WPFMVVMDemo.ViewModel
                 DisPlayTextUnder = Cache.underCache;
                 Cache.underCache = "";
             }
-            
+            }
+
         }
         private void DotHandler()
         {
@@ -374,9 +378,6 @@ namespace WPFMVVMDemo.ViewModel
         {
             DisPlayTextUnder = eq.getResult();
             DisPlayTextTop = "";
-            Cache.judgeNewInp = false;
-            Cache.judgeTurn = true;
-            Cache.judgeSinge = false;
 
         }
         private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };
