@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WPFMVVMDemo.ViewModel.History
 {
-    //历史记录zb
+    //历史记录
    public class History_Memory
     {
         
