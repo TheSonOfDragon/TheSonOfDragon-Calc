@@ -24,11 +24,14 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
                 Cache.underCache = "0";
                 return Cache.underCache;
             }
-            else
+            if (Cache.underCache != "0")
             {
+
                 Cache.underCache += 0;
                 return Cache.underCache;
             }
+            return "";
+            
         }
     }
     

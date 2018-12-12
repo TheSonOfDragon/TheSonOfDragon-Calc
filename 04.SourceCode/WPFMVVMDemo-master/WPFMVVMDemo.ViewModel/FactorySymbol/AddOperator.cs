@@ -45,6 +45,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     if (Cache.resultCache == "")
                     { 
                         Cache.resultCache =Cache.underCache;
+                        Console.WriteLine(Cache.resultCache);
                     }
                         //新输入一个符号后的运算，只走一次
                             switch (Cache.operatorCacheOld)
