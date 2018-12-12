@@ -7,6 +7,7 @@ using Memory;
 
 namespace WPFMVVMDemo.ViewModel
 {
+    //yuyu
     static class AddComma
     {
         //为整数部分添加逗号
