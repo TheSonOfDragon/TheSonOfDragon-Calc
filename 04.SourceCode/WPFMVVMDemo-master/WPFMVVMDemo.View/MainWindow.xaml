@@ -19,7 +19,7 @@
     <Grid Background="#FFE9E9E9">
         <Button Content="" Name="button1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="40" FontSize="24" BorderThickness="0"  Cursor="Hand"  >
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\caidan1.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/caidan1.png" Stretch="Fill"/>
             </Button.Background>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="45,7,0,0" TextWrapping="Wrap" Text="标准" VerticalAlignment="Top" Height="40" FontSize="18" />
@@ -65,10 +65,10 @@
             <Button Grid.Column="1" Grid.Row="5" FontSize="20" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding ClearAllCommand}" FontFamily="微软雅黑 Light">C</Button>
 
             <Button Margin="0,0,0,0" BorderThickness="0"  Grid.Column="2" Grid.Row="5"  Background="#FFF0F0F0" Command="{Binding DelCommand}">
-                <Image Source="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\caidan7.png"  Stretch="None" Margin="-20,0,-10,0"/>
+                <Image Source="pack://application:,,,/Resources/caidan7.png"  Stretch="None" Margin="-20,0,-10,0"/>
             </Button>
             <Button Grid.Column="3" Grid.Row="0" BorderThickness="0" Background="#FFE9E9E9" >
-                <Image Source="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\caidan123.png"  Stretch="None" Height="44" Margin="20,-5,0,0" />
+                <Image Source="pack://application:,,,/Resources/caidan123.png"  Stretch="None" Height="44" Margin="20,-5,0,0" />
 
             </Button>
             <Button Grid.Column="3" Grid.Row="5" FontSize="33" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding DivideCommand}" FontFamily="微软雅黑 Light">÷</Button>
@@ -81,11 +81,11 @@
             <Button Content="MC" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="41" Background="#FFE9E9E9" BorderThickness="0" Height="16"  />
             <Button Grid.Column="4" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="历史记录" Click="Button_Click" FontWeight="Bold" />
             <Button Grid.Column="5" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="内存" Click="Button_Click_1" FontWeight="Bold" />
-            <ListBox x:Name="listhistory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
-                <Image Source="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\line1.png" Width="101" ></Image>
+            <ListBox x:Name="listhistory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible" ItemsSource="{Binding History}"  >
+                <!--<Image Source="pack://application:,,,/Resources/line1.png" Width="101" ></Image>-->
             </ListBox>
-            <ListBox x:Name="listmemory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
-                <Image Source="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\line2.png" Height="5" Width="189"/>
+            <ListBox x:Name="listmemory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Hidden"  ItemsSource="{Binding Memory}" >
+                <!--<Image Source="pack://application:,,,/Resources/line2.png" Height="5" Width="189"/>-->
             </ListBox>
             <Button Content="MR" HorizontalAlignment="Left" Margin="83,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="48" Background="#FFE9E9E9" BorderThickness="0" Height="16" Grid.ColumnSpan="2"  />
             <Button Content="M-" HorizontalAlignment="Left" Margin="69,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="44" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="2" Height="16" Grid.ColumnSpan="2"  />

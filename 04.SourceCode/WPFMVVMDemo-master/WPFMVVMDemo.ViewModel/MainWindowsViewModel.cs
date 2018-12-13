@@ -309,7 +309,8 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void PercentOneHandler()//%
         {
-            
+            DisPlayTextTop = addSingle.JudgeForSinge("%");
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
         private void SquareHandler()//平方
         {
@@ -332,7 +333,7 @@ namespace WPFMVVMDemo.ViewModel
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
 
-        private void ClearAllHandler()
+        private void ClearAllHandler()//C键清空所有
         {
             Cache.topCache = "";
             Cache.underCache = "";
@@ -344,14 +345,16 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeNewInp = false;
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;
+            Cache.judgeEqual = false;
 
         }
-        private void ClearPreHandler()
+        private void ClearPreHandler()//CE键退一步操作
         {
-            if (Cache.judgeTurn)
+            if (Cache.judgeSinge)
             {
                 Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.LastIndexOf(Cache.operatorCacheNew)+1);
                 DisPlayTextTop = Cache.topCache;
+                Cache.judgeSinge = false;
             }
             DisPlayTextUnder = "0";
             Cache.underCache = "0";
@@ -378,7 +381,6 @@ namespace WPFMVVMDemo.ViewModel
             {
                 Cache.underCache = "0";
                 DisPlayTextUnder = Cache.underCache;
-                Cache.underCache = "";
             }
             }
 
@@ -409,7 +411,7 @@ namespace WPFMVVMDemo.ViewModel
         private void MS()
         {
             Memory.Clear();
-            Memory.Add(MainWindowsViewModel._disPlayTextUnder);
+            myMemory.mymemory.Add(MainWindowsViewModel._disPlayTextUnder);
             foreach (var item in Memory)
 
             {

@@ -15,7 +15,13 @@ namespace WPFMVVMDemo.ViewModel
         public string getResult()
         {
             Cache.judgeEqual = true;
-            if (Cache.judgeNewInp && !Cache.judgeTurn)
+            Cache.judgeTurn = true;
+            Cache.judgeNewInp = true;
+            if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew =="")
+            {
+                num = Cache.underCache;
+            }
+            else if (Cache.judgeNewInp && !Cache.judgeTurn)
             {
                 Cache.resultCache = MainWindowsViewModel._disPlayTextUnder;
             switch (Cache.operatorCacheNew)
