@@ -11,15 +11,17 @@ namespace WPFMVVMDemo.ViewModel.Symbol
     public class AddSingle : IJudge.JudgeForSingle
     {
         Complex_Operation CO = new Complex_Operation();
-
+        AddSymbol sy = new AddSymbol();
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
         {
             Cache.judgeTurn = true;
             Cache.operatorCacheOld = Cache.operatorCacheNew;
-            if (Cache.judgeEqual)
+            if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
+                Cache.resultCache = "";
+                Cache.operatorCacheOld = "";
                 Cache.judgeEqual = false;
             }
             switch (single)
@@ -191,13 +193,103 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         }
                         else
                         {
-                            Cache.underCache = CO.Minus(Cache.underCache);
-                        }
+                            if ("0.".Equals(Cache.underCache))
+                            {
+                                Cache.underCache = sy.GetSymbol();
+                            }
+                            else
+                            {
+                                if (Cache.underCache.Contains("."))
+                                {
+                                    Cache.underCache = sy.GetSymbol();
+                                }
+                                else
+                                {
+                                    Cache.underCache = CO.Minus(Cache.underCache);
+                                }
 
+                            }
+
+                        }
 
                     }
                     break;
+                case "%":
+                    if (!Cache.judgeEqual)
+                    {
+                        if ("".Equals(Cache.operatorCacheOld))
+                        {
+                            Cache.topCache = "0";
+                            Cache.underCache = "0";
+                        }
+                        else
+                        {
+                            if (Cache.judgeNewInp)
+                            {
+                                if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
+                                {
+                                    int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                    string str = Cache.topCache.Substring(0, index);
+                                    Cache.topCache = str + (Convert.ToDecimal(Cache.underCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.underCache = (Convert.ToDecimal(Cache.underCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.judgeSinge = true;
+                                }
+                                else if ("×".Equals(Cache.operatorCacheNew) || "÷".Equals(Cache.operatorCacheNew))
+                                {
+                                    int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                    string str = Cache.topCache.Substring(0, index);
+                                    Cache.topCache = str + (Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.underCache = (Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.judgeSinge = true;
+                                }
+                            }
+                            else
+                            {
+                                if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
+                                {
+                                    int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                    string str = Cache.topCache.Substring(0, index);
+                                    Cache.topCache = str + (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.underCache = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.judgeSinge = true;
+                                }
+                                else if ("×".Equals(Cache.operatorCacheNew) || "÷".Equals(Cache.operatorCacheNew))
+                                {
+                                    int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                    string str = Cache.topCache.Substring(0, index);
+                                    Cache.topCache = str + (Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.underCache = (Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.judgeSinge = true;
+                                }
+                            }
+                        }
 
+                    }
+                    else
+                    {
+                        if ("".Equals(Cache.operatorCacheNew))
+                        {
+                            Cache.topCache = "0";
+                            Cache.underCache = "0";
+                        }
+                        else
+                        {
+                            if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
+                            {
+                                Cache.topCache = (Convert.ToDecimal(MainWindowsViewModel._disPlayTextUnder) * Convert.ToDecimal(MainWindowsViewModel._disPlayTextUnder) / 100).ToString();
+                                Cache.underCache = (Convert.ToDecimal(MainWindowsViewModel._disPlayTextUnder) * Convert.ToDecimal(MainWindowsViewModel._disPlayTextUnder) / 100).ToString();
+                                Cache.judgeSinge = true;
+                            }
+                            else if ("×".Equals(Cache.operatorCacheNew) || "÷".Equals(Cache.operatorCacheNew))
+                            {
+                                Cache.topCache = (Convert.ToDecimal(MainWindowsViewModel._disPlayTextUnder) / 100).ToString();
+                                Cache.underCache = (Convert.ToDecimal(MainWindowsViewModel._disPlayTextUnder) / 100).ToString();
+                                Cache.judgeSinge = true;
+                            }
+                        }
+                    }
+
+                    break;
             }
             return Cache.topCache;
 

@@ -13,7 +13,6 @@ namespace Operation
     {
         public Double Add(string num1, string num2)
         {
-            
             return Convert.ToDouble(num1) + Convert.ToDouble(num2);
 
         }

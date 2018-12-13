@@ -11,19 +11,18 @@ namespace WPFMVVMDemo.ViewModel.Symbol
     public class AddSymbol
     {
         //正负号，对Cache.underCache的值无变化，只改变大小
-        private bool flag = true;
         public string GetSymbol()
         {
-            if (flag)
+            if (Cache.judgeMinus)
             {
                 Cache.underCache = "-" + Cache.underCache;
-                flag = false;
+                Cache.judgeMinus = false;
                 return Cache.underCache;
             }
             else
             {
                 Cache.underCache = Cache.underCache.Substring(1, Cache.underCache.Length - 1);
-                flag = true;
+                Cache.judgeMinus = true;
                 return Cache.underCache;
             }
         }

@@ -27,6 +27,7 @@ namespace Memory
         public static bool judgeSinge = false;
         //判断是否按过等于
         public static bool judgeEqual = false;
-        
+        //判断是否正负过
+        public static bool judgeMinus = true;
     }
 }

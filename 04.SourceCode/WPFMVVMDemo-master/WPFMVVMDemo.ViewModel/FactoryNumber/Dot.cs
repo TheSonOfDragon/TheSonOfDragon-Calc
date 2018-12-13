@@ -14,6 +14,7 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
             if (Cache.judgeNewInp)
             {
                 Cache.underCache = "";
+                Cache.judgeNewInp = false;
             }
             //点.只对Cache.underCache进行操作
             if (Cache.underCache.Contains("."))
