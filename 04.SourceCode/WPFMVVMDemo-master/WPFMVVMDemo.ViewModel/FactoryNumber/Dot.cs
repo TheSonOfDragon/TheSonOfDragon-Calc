@@ -11,6 +11,10 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
     {
         public string Judgefordot()
         {
+            if (Cache.judgeNewInp)
+            {
+                Cache.underCache = "";
+            }
             //点.只对Cache.underCache进行操作
             if (Cache.underCache.Contains("."))
             {

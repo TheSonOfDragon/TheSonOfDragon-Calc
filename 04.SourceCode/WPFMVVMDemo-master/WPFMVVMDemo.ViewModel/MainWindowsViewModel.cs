@@ -235,13 +235,13 @@ namespace WPFMVVMDemo.ViewModel
 
         private void AddHandler()
         {
-            DisPlayTextTop = addOperator.JudgeOperator("+");
+            DisPlayTextTop = addOperator.JudgeOperator("＋");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache) ;
         }
         
         private void SubtractHandler()
         {
-            DisPlayTextTop = addOperator.JudgeOperator("-");
+            DisPlayTextTop = addOperator.JudgeOperator("－");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
         }
         
@@ -318,8 +318,8 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void InverseHandler()//相反数
         {
-            //DisPlayTextUnder = AddComma.Addcomma(addSymbol.GetSymbol()) ;
-            //DisPlayTextTop = AddComma.Addcomma(Cache.underCache);
+            DisPlayTextTop = addSingle.JudgeForSinge("±");
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
         private void ReciprocalHandler()//倒数
         {
@@ -348,13 +348,26 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void ClearPreHandler()
         {
+            if (Cache.judgeTurn)
+            {
+                Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.LastIndexOf(Cache.operatorCacheNew)+1);
+                DisPlayTextTop = Cache.topCache;
+            }
             DisPlayTextUnder = "0";
-            Cache.underCache = "";
+            Cache.underCache = "0";
         }
         private void DelHandler() //退格键 
         {
-            if(!Cache.judgeNewInp&&!Cache.judgeTurn)
+            if(Cache.judgeNewInp)
             {
+            }
+            else if(!Cache.judgeTurn)
+            {
+
+            }
+            else
+            {
+
 
             if (Cache.underCache.Length > 1)
             {
@@ -374,10 +387,11 @@ namespace WPFMVVMDemo.ViewModel
         {
             DisPlayTextUnder = addDot.Judgefordot();
         }
-        private void EqualsHandler()
+        private void EqualsHandler()//等于
         {
             DisPlayTextUnder = eq.getResult();
             DisPlayTextTop = "";
+            Cache.topCache = "";
 
         }
         private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };

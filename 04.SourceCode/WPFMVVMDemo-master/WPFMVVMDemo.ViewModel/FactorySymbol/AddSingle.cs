@@ -17,6 +17,11 @@ namespace WPFMVVMDemo.ViewModel.Symbol
         {
             Cache.judgeTurn = true;
             Cache.operatorCacheOld = Cache.operatorCacheNew;
+            if (Cache.judgeEqual)
+            {
+                Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
+                Cache.judgeEqual = false;
+            }
             switch (single)
             {
                 case "√":
@@ -145,7 +150,53 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     }
                     break;
+                case "±":
+                    if (Cache.judgeNewInp)
+                    {
 
+                        if (!Cache.judgeSinge)
+                        {
+
+                            Cache.topCache += ("negate(" + Cache.underCache + ")");
+                            Cache.underCache = CO.Minus(Cache.underCache);
+                            Cache.judgeSinge = true;
+
+                        }
+                        else
+                        {
+                            int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                            string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                            Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
+                            Cache.underCache = CO.Minus(Cache.underCache);
+                        }
+                    }
+                    else
+                    {
+
+                        if ("".Equals(Cache.underCache))
+                        {
+                            if (!Cache.judgeSinge)
+                            {
+                                Cache.topCache = ("negate(" + "0" + ")");
+                                Cache.underCache = "0";
+                                Cache.judgeSinge = true;
+                            }
+
+
+                        }
+                        else if (Cache.judgeSinge == true && "0".Equals(Cache.underCache))
+                        {
+                            Cache.topCache = ("negate(" + Cache.topCache + ")");
+                            Cache.underCache = "0";
+                        }
+                        else
+                        {
+                            Cache.underCache = CO.Minus(Cache.underCache);
+                        }
+
+
+                    }
+                    break;
 
             }
             return Cache.topCache;

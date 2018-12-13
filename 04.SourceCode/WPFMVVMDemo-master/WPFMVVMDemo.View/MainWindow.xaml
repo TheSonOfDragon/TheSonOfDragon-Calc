@@ -83,11 +83,9 @@
             <Button Grid.Column="5" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="内存" Click="Button_Click_1" FontWeight="Bold" />
             <ListBox x:Name="listhistory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
                 <Image Source="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\line1.png" Width="101" ></Image>
-                <TextBlock Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Text="尚无历史记录"></TextBlock>
             </ListBox>
             <ListBox x:Name="listmemory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
                 <Image Source="C:\Users\Administrator\Desktop\WPFMVVMDemo-master\line2.png" Height="5" Width="189"/>
-                <TextBlock Text="内存中没有内容 " />
             </ListBox>
             <Button Content="MR" HorizontalAlignment="Left" Margin="83,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="48" Background="#FFE9E9E9" BorderThickness="0" Height="16" Grid.ColumnSpan="2"  />
             <Button Content="M-" HorizontalAlignment="Left" Margin="69,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="44" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="2" Height="16" Grid.ColumnSpan="2"  />

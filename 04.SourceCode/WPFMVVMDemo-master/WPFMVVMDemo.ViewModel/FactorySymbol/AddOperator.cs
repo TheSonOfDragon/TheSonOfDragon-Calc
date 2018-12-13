@@ -50,11 +50,11 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         //新输入一个符号后的运算，只走一次
                             switch (Cache.operatorCacheOld)
                             {
-                                case "+":
+                                case "＋":
                                     Cache.underCache = bo.Add(Cache.resultCache, Cache.underCache).ToString();
                                     Cache.resultCache = Cache.underCache;
                                     break;
-                                case "-":
+                                case "－":
                                     Cache.underCache = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
                                     Cache.resultCache = Cache.underCache;
                                     break;
