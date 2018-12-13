@@ -346,6 +346,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;
             Cache.judgeEqual = false;
+            Cache.judgeMinus = true;
 
         }
         private void ClearPreHandler()//CE键退一步操作
@@ -412,6 +413,7 @@ namespace WPFMVVMDemo.ViewModel
         {
             Memory.Clear();
             myMemory.mymemory.Add(MainWindowsViewModel._disPlayTextUnder);
+            Console.WriteLine();
             foreach (var item in Memory)
 
             {
