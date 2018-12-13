@@ -235,13 +235,13 @@ namespace WPFMVVMDemo.ViewModel
 
         private void AddHandler()
         {
-            DisPlayTextTop = addOperator.JudgeOperator("+");
+            DisPlayTextTop = addOperator.JudgeOperator("＋");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache) ;
         }
         
         private void SubtractHandler()
         {
-            DisPlayTextTop = addOperator.JudgeOperator("-");
+            DisPlayTextTop = addOperator.JudgeOperator("－");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
         }
         
@@ -309,7 +309,8 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void PercentOneHandler()//%
         {
-            
+            DisPlayTextTop = addSingle.JudgeForSinge("%");
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
         private void SquareHandler()//平方
         {
@@ -373,10 +374,10 @@ namespace WPFMVVMDemo.ViewModel
         private void EqualsHandler()
         {
             DisPlayTextUnder = eq.getResult();
+
             DisPlayTextTop = "";
-            Cache.judgeNewInp = false;
-            Cache.judgeTurn = true;
-            Cache.judgeSinge = false;
+
+            Cache.topCache = "";
 
         }
         private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };
