@@ -14,15 +14,16 @@ namespace WPFMVVMDemo.ViewModel
         Basic_Opreation bo = new Basic_Opreation();
         public string getResult()
         {
+            Cache.judgeEqual = true;
             if (Cache.judgeNewInp && !Cache.judgeTurn)
             {
                 Cache.resultCache = MainWindowsViewModel._disPlayTextUnder;
             switch (Cache.operatorCacheNew)
             {
-                case "+":
+                case "＋":
                     num = bo.Add(Cache.resultCache, Cache.underCache).ToString();
                     break;
-                case "-":
+                case "－":
                     num = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
                     break;
                 case "×":
@@ -37,11 +38,11 @@ namespace WPFMVVMDemo.ViewModel
             {
                 switch (Cache.operatorCacheNew)
                 {
-                    case "+":
+                    case "＋":
                         num = bo.Add(Cache.resultCache, Cache.underCache).ToString();
                         Cache.resultCache = num;
                         break;
-                    case "-":
+                    case "－":
                         num = bo.Sub(Cache.resultCache, Cache.underCache).ToString();
                         Cache.resultCache = num;
                         break;
