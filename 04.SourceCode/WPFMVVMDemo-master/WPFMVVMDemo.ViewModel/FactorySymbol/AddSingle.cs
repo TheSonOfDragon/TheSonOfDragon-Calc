@@ -12,6 +12,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
     {
         Complex_Operation CO = new Complex_Operation();
         Equals eq = new Equals();
+        AddSymbol sy = new AddSymbol();
 
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
@@ -148,9 +149,10 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     break;
 
                 case "±":
+                    //如果没有新的输入，最后输入的是运算符
                     if (Cache.judgeNewInp)
                     {
-
+                        //判断是否进行过负数运算
                         if (!Cache.judgeSinge)
                         {
                            
@@ -188,14 +190,32 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         }
                         else
                         {
-                            Cache.underCache = CO.Minus(Cache.underCache);
+                            if ("0.".Equals(Cache.underCache))
+                            {
+                                Cache.underCache = sy.GetSymbol();
+                            }
+                            else
+                            {
+                                if (Cache.underCache.Contains("."))
+                                {
+                                    Cache.underCache = sy.GetSymbol(); 
+                                }
+                                else
+                                {
+                                    Cache.underCache = CO.Minus(Cache.underCache);
+                                }
+                                
+                            }
+                    
                         }
 
                     }
                     break;
                 case "%":
+                    //是否进行过等号运算
                     if (!Cache.judgeEqual)
                     {
+                        //是否进行过双目运算
                         if ("".Equals(Cache.operatorCacheOld))
                         {
                             Cache.topCache = "0";
@@ -203,6 +223,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         }
                         else
                         {
+                            //如果没有新的输入，数据加减乘除后直接进行百分号运算
                             if (Cache.judgeNewInp)
                             {
                                 if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
@@ -222,6 +243,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                     Cache.judgeSinge = true;
                                 }
                             }
+                            //有新的输入，数据加减乘除数据之后进行百分号运算
                             else
                             {
                                 if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
@@ -244,6 +266,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         }
 
                     }
+                    //如果没有过等号运算
                     else
                     {
                         if ("".Equals(Cache.operatorCacheNew))

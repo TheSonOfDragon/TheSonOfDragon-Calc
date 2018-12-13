@@ -345,6 +345,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeNewInp = false;
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;
+            Cache.judgeMinus = true;
 
         }
         private void ClearPreHandler()

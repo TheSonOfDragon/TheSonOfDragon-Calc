@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="BasicOpreation.cs" />
     <Compile Include="ComplexOperation.cs" />
-    <Compile Include="PercentOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

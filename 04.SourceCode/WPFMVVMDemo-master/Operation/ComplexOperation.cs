@@ -16,11 +16,13 @@ namespace Operation
         }
         public string Squ(string num1)
         {
-            return Math.Pow(Convert.ToDouble(num1), 2).ToString();
+            return (Convert.ToDouble(num1) * Convert.ToDouble(num1)).ToString();
         }
         public string OneCent(string num1)
         {
             return (1 / Convert.ToDouble(num1)).ToString();
+            
+            
         }
         public string Minus(string num1)
         {
