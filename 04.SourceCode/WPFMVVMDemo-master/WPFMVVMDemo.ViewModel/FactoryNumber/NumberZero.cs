@@ -22,7 +22,7 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
             if (Cache.underCache == "")
             {
                 Cache.underCache = "0";
-                return Cache.underCache;
+                return AddFormat.Addformat(Cache.underCache);
             }
             if (Cache.underCache != "0")
             {
