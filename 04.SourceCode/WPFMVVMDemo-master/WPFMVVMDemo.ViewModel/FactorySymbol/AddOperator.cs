@@ -31,6 +31,8 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                 
                     Cache.operatorCacheNew = opt;
                     Cache.topCache = 0 + opt;
+                Cache.judgeTurn = false;
+                Cache.resultCache = "0";
                     Cache.underCache = "0";
 
             }
@@ -51,7 +53,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     }
                     if (Cache.resultCache == "")
                     { 
-                        Cache.resultCache = AddFormat.Addformat(Cache.underCache);
+                        Cache.resultCache =AddFormat.Addformat(Cache.underCache);
                        // Console.WriteLine(Cache.resultCache);
                     }
                         //新输入一个符号后的运算，只走一次
@@ -81,7 +83,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length - 1) + opt;
                 }
                 }
-#endregion
+#endregion 
             return Cache.topCache;
             }
 
