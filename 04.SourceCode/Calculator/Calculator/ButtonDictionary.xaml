@@ -2,28 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Calculator">
 
-    <Style TargetType="{x:Type Button}">
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#FFFAFAFA"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="{x:Type Button}">
-                    <Border x:Name="border"  BorderThickness="1" BorderBrush="#68B0E8"  CornerRadius="0.5" 
-                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="{TemplateBinding Padding}"
-                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="#C8D1D0" Offset="0.5" />
-                                <GradientStop Color="#C8D1D0" Offset="0.8" />
-                                <GradientStop Color="#C8D1D0" Offset="1" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <Label x:Name="lbContent" Content="{TemplateBinding Content}" Background="Transparent" Height="{TemplateBinding Height}"
-                               VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                    <Border x:Name="border">
+                        <Label x:Name="lbContent" Background="Transparent"></Label>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource window_Button_MouseOver}"></Setter>
-                            <Setter Property="Foreground" TargetName="lbContent" Value="White"></Setter>
-                            <!--<Setter Property="Opacity" TargetName="border" Value="0.6"></Setter>-->
+                            <Setter TargetName="border" Property="Background" Value="#D6D6D6"></Setter>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
