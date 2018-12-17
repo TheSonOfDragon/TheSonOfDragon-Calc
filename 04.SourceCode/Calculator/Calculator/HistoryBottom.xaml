@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        d:DesignHeight="500" d:DesignWidth="322" Background="#FFE6E6E6">
-    <Grid MinHeight="385" MinWidth="322">
+        d:DesignHeight="300" d:DesignWidth="322" Background="#FFE6E6E6">
+    <Grid MinHeight="300" MinWidth="322">
         <ScrollViewer>
             <ListBox Background="#FFE6E6E6" Margin="0"></ListBox>
         </ScrollViewer>
     </Grid>
-    
-
 </UserControl>

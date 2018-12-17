@@ -1,4 +1,31 @@
-﻿using MahApps.Metro.Controls;
+﻿//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
+//
+//
+//
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -17,7 +44,8 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-            
+            this.SizeChanged += new System.Windows.SizeChangedEventHandler(MainWindow_Resize);
+
         }
 
         #region 标题栏所有事件
@@ -55,9 +83,9 @@ namespace Calculator
         /// <summary>
         /// 窗口移动事件
         /// </summary>
-        private void TitleBar_MouseMove(object sender,MouseEventArgs e)
+        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton==MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
             }
@@ -67,7 +95,7 @@ namespace Calculator
         /// <summary>
         /// 鼠标双击事件
         /// </summary>
-        private void TitleBar_MouseDown(object sender,MouseButtonEventArgs e)
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             i += 1;
             System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
@@ -95,11 +123,25 @@ namespace Calculator
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.bottomFlyout.Visibility = Visibility.Visible;
-            if (!this.bottomFlyout.IsOpen)
+            if (this.bottomFlyout.Visibility==Visibility.Visible)
             {
+                this.bottomFlyout.Visibility = Visibility.Hidden;
+                this.bottomFlyout.IsOpen = false;
+            }
+            else
+            {
+                this.bottomFlyout.Visibility = Visibility.Visible;
                 this.bottomFlyout.IsOpen = true;
             }
+        }
+
+        private void MainWindow_Resize(object sender, System.EventArgs e)
+        {
+            if (this.Width>=700)
+            {
+                Window.
+            }
+
         }
     }
 }

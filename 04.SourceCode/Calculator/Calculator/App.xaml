@@ -11,7 +11,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="./ButtonDictionary.xaml"/>
+                <ResourceDictionary Source="./Dictionary/NumButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/SymButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/MemoryButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/CloseButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/TitleButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/RHistoryMemoryButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

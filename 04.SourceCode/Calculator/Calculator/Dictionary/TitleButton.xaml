@@ -2,18 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Calculator">
 
-    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="#FFFAFAFA"></Setter>
+    <Style x:Key="TitleStyle" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="{x:Type Button}">
                     <Border x:Name="border">
-                        <Label x:Name="lbContent" Background="Transparent"></Label>
+                        <Label Content="{TemplateBinding Content}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#D6D6D6"></Setter>
-                            <Setter TargetName="border" Property="BorderThickness" Value="1"></Setter>
+                            <Setter TargetName="border" Property="Background" Value="#FFD4CFCF"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FFE6E6E6"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FFBEBABA"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
