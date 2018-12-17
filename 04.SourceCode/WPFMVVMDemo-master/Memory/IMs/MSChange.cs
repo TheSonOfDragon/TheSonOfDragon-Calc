@@ -8,6 +8,6 @@ namespace IMS
 {
    interface MSChange
     {
-        void MsChange();
+        void MSChange(string num);
     }
 }

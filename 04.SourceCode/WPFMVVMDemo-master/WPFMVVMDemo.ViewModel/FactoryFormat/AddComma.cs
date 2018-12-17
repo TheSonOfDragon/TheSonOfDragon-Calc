@@ -14,13 +14,13 @@ namespace WPFMVVMDemo.ViewModel
         public static string Addcomma(string underCache)
         {
             string integer;
-            if (Cache.underCache.Contains("-") && Cache.underCache.Contains(".") && Cache.underCache.Length >= 19)
-            {
-                Cache.underCache = Cache.underCache.Substring(0, 19);
-            }
-            else if (!Cache.underCache.Contains("-") && Cache.underCache.Contains(".") && Cache.underCache.Length >= 18)
+            if (Cache.underCache.Contains("-") && Cache.underCache.Contains(".") && Cache.underCache.Length >= 18)
             {
                 Cache.underCache = Cache.underCache.Substring(0, 18);
+            }
+            else if (!Cache.underCache.Contains("-") && Cache.underCache.Contains(".") && Cache.underCache.Length >= 17)
+            {
+                Cache.underCache = Cache.underCache.Substring(0, 17);
             }
             else if (Cache.underCache.Contains("-") && !Cache.underCache.Contains(".") && Cache.underCache.Length >= 17)
             {
@@ -54,7 +54,10 @@ namespace WPFMVVMDemo.ViewModel
         {
             //整数部分3个以下不需要加逗号
             if (integer.Length <= 3)
+            {
                 return;
+            }
+                
 
             char[] strs = integer.ToCharArray();
             List<char> list = new List<char>();

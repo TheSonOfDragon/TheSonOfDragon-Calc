@@ -78,21 +78,23 @@
             <Button Grid.Column="3" Grid.Row="4" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" FontFamily="Vivaldi" Command="{Binding ReciprocalCommand}">¹/x</Button>
             <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Background="#FFE9E9E9"  Text="{Binding DisPlayTextTop}" FontSize="12" TextAlignment="Right" ></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Background="#FFE9E9E9"  Text="{Binding DisPlayTextUnder}" FontSize="24" TextAlignment="Right" FontWeight="Bold" ></TextBlock>
-            <Button Content="MC" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="41" Background="#FFE9E9E9" BorderThickness="0" Height="16"  />
+            <Button Content="MC" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="41" Background="#FFE9E9E9" BorderThickness="0" Height="16" Command="{Binding Btn_mc}" />
             <Button Grid.Column="4" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="历史记录" Click="Button_Click" FontWeight="Bold" />
             <Button Grid.Column="5" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="内存" Click="Button_Click_1" FontWeight="Bold" />
             <ListBox x:Name="listhistory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
                 <Image Source="C:\Users\zhoubao\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\line1.png" Width="101" ></Image>
                 <TextBlock Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Text="尚无历史记录"></TextBlock>
+                <ListBox x:Name="bb" Height="521" Width="276" ItemsSource="{Binding History}"></ListBox>
             </ListBox>
             <ListBox x:Name="listmemory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
                 <Image Source="C:\Users\zhoubao\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\line2.png" Height="5" Width="189"/>
                 <TextBlock Text="内存中没有内容 " />
+                <ListBox x:Name="aa" Height="521" Width="276" ItemsSource="{Binding Memory}"></ListBox>
             </ListBox>
-            <Button Content="MR" HorizontalAlignment="Left" Margin="83,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="48" Background="#FFE9E9E9" BorderThickness="0" Height="16" Grid.ColumnSpan="2"  />
-            <Button Content="M-" HorizontalAlignment="Left" Margin="69,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="44" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="2" Height="16" Grid.ColumnSpan="2"  />
-            <Button Content="MS" HorizontalAlignment="Left" Margin="54,17,0,0" Grid.Row="3" Width="36" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="3" Command="{Binding Btn_ms}"  />
-            <Button Content="M+" HorizontalAlignment="Left" Margin="79,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="42" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="1" Height="16" Grid.ColumnSpan="2"  />
+            <Button Content="MR" HorizontalAlignment="Left" Margin="83,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="48" Background="#FFE9E9E9" BorderThickness="0" Height="16" Grid.ColumnSpan="2" Command="{Binding Btn_mr}" />
+            <Button Content="M-" HorizontalAlignment="Left" Margin="69,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="44" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="2" Height="16" Grid.ColumnSpan="2" Command="{Binding Btn_minus}" />
+            <Button Content="MS" HorizontalAlignment="Left" Margin="54,17,0,0" Grid.Row="3" Width="36" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="3" Command="{Binding Btn_ms}" />
+            <Button Content="M+" HorizontalAlignment="Left" Margin="79,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="42" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="1" Height="16" Grid.ColumnSpan="2" Command="{Binding Btn_plus}" />
         </Grid>
     </Grid>
 </Window>

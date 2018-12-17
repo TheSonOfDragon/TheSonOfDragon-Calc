@@ -6,15 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace WPFMVVMDemo.ViewModel.History
+namespace Memory
 {
     //历史记录
    public class History_Memory
     {
         
-        List<string> list = new List<string>();
+        List<string> history = new List<string>();
 
-        public void AddStorage() { }
+        public void AddHistory(string num)
+        {
+            history.Add(num);
+        }
+        public List<string> GetHistory()
+        {
+            return history;
+        }
         public void Remove() { }
         public void clear() { }
     }
