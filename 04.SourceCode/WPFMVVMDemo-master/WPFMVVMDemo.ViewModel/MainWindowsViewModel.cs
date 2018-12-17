@@ -413,7 +413,7 @@ namespace WPFMVVMDemo.ViewModel
             }
             else
             {
-                his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                his.AddHistory(DisPlayTextTop + Cache.underCache + "=" + DisPlayTextUnder);
                 History.Clear();
                 foreach (var item in his.GetHistory())
 
