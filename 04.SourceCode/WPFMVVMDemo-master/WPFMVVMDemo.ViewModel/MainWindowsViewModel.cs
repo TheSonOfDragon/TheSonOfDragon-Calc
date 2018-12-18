@@ -29,6 +29,7 @@ namespace WPFMVVMDemo.ViewModel
         Symbol.AddSymbol addSymbol = new Symbol.AddSymbol();
         Symbol.AddSingle addSingle = new Symbol.AddSingle();
         Memory.Memory mem = new Memory.Memory();
+        Memory.History his = new Memory.History();
         Equals eq = new Equals();
 
         public string DisPlayTextUnder
@@ -426,6 +427,36 @@ namespace WPFMVVMDemo.ViewModel
         private void EqualsHandler()//等于
         {
             DisPlayTextUnder =AddFormat.Addformat(eq.getResult()) ;
+            if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew == "")//直接等于
+            {
+                his.AddHistory(Cache.resultCache + "=" + Cache.resultCache);
+            }
+            else if ("".Equals(Cache.operatorCacheNew))
+            {//单目后等于
+
+            }
+            else if (Cache.judgeNewInp && !Cache.judgeTurn)//混合等于
+            {
+
+            }
+            else//最后一位运算符
+            {
+                if (_disPlayTextTop != "")
+                {
+                his.AddHistory(_disPlayTextTop+ Cache.underCache + "=" + Cache.resultCache);
+
+                }else
+                {
+                his.AddHistory(_disPlayTextUnder + Cache.operatorCacheNew + Cache.underCache + "=" + Cache.resultCache);
+                }
+            }
+            History.Clear();
+            foreach (var item in his.GetHistory())
+
+            {
+                History.Insert(0, item);
+
+            }
             DisPlayTextTop = "";
             Cache.topCache = "";
 

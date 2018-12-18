@@ -7,7 +7,7 @@ namespace Memory
     //内存
     public class Memory : IMS.MSChange, IMS.MSClear, IMS.MSUse
     {
-        public static List<string> mymemory = new List<string>();
+         List<string> mymemory = new List<string>();
 
         public void MSChange(string num)
         {

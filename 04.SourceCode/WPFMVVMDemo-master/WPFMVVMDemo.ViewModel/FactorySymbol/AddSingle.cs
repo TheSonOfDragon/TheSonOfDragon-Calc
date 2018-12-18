@@ -22,9 +22,13 @@ namespace WPFMVVMDemo.ViewModel.Symbol
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
-                Cache.resultCache = "";
                 Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+                Cache.resultCache = "";
+                Cache.judgeTurn = true;
+                Cache.judgeSinge = false;
                 Cache.judgeEqual = false;
+                Cache.judgeMinus = true;
             }
             switch (single)
             {

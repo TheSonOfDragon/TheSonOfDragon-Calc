@@ -11,14 +11,19 @@ namespace WPFMVVMDemo.ViewModel
   public  class Equals
     {
         Basic_Opreation bo = new Basic_Opreation();
+        Memory.History his = new Memory.History();
         public string getResult()
         {
             Cache.judgeEqual = true;
             Cache.judgeTurn = true;
             Cache.judgeNewInp = true;
+            
             if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew =="")//直接等于
             {
                 Cache.resultCache =Cache.underCache;
+               his.AddHistory(Cache.resultCache+"="+Cache.resultCache);
+                his.AddHistory("111");
+
             }else if("".Equals(Cache.operatorCacheNew)){//单目后等于
                 Cache.resultCache = Cache.underCache;
             }
@@ -64,8 +69,8 @@ namespace WPFMVVMDemo.ViewModel
                 }
 
             }
-
-                    return Cache.resultCache;
+            
+                    return AddComma.Addcomma(Cache.resultCache);
         }
     }
 }
