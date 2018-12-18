@@ -28,7 +28,7 @@ namespace WPFMVVMDemo.ViewModel
         Symbol.AddOperator addOperator = new Symbol.AddOperator();
         Symbol.AddSymbol addSymbol = new Symbol.AddSymbol();
         Symbol.AddSingle addSingle = new Symbol.AddSingle();
-        Memory.Memory myMemory = new Memory.Memory();
+        Memory.Memory mem = new Memory.Memory();
         Equals eq = new Equals();
 
         public string DisPlayTextUnder
@@ -236,76 +236,84 @@ namespace WPFMVVMDemo.ViewModel
         private void AddHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("＋");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache) ;
+            DisPlayTextUnder =AddFormat.Addformat(AddComma.Addcomma(Cache.underCache))   ;
         }
         
         private void SubtractHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("－");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
         
         private void MultiplyHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("×");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
+            DisPlayTextUnder =AddFormat.Addformat(AddComma.Addcomma(Cache.underCache))   ;
         }
 
         private void DivideHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("÷");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache)  ;
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
 
         //添加添加0-9数字的方法
         private void Num1Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("1"))  ;
+            DisPlayTextTop = Cache.topCache;
             //Console.WriteLine(_disPlayTextUnder);
 
         }
         private void Num2Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("2"))  ;
+            DisPlayTextTop = Cache.topCache;
         }
         private void Num3Handler()
         {
 
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("3"))  ;
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num4Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("4"))  ;
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num5Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("5"))  ;
+            DisPlayTextTop = Cache.topCache;
         }
         private void Num6Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("6"))  ;
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num7Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("7"))  ;
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num8Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("8"))  ;
-
+            DisPlayTextTop = Cache.topCache;
         }
         private void Num9Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("9"))  ;
-
+            DisPlayTextTop = Cache.topCache;
         }
         private void Num0Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum0.JudgeZero())  ;
+            DisPlayTextTop = Cache.topCache;
         }
         private void PercentOneHandler()//%
         {
@@ -349,6 +357,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeMinus = true;
 
         }
+            #region CE
         private void ClearPreHandler()//CE键退一步操作
         {
             if (Cache.judgeSinge)
@@ -359,6 +368,7 @@ namespace WPFMVVMDemo.ViewModel
             }
             DisPlayTextUnder = "0";
             Cache.underCache = "0";
+            #endregion
         }
         private void DelHandler() //退格键 
         {
@@ -388,11 +398,11 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void DotHandler()
         {
-            DisPlayTextUnder = addDot.Judgefordot();
+            DisPlayTextUnder = AddComma.Addcomma(addDot.Judgefordot()) ;
         }
         private void EqualsHandler()//等于
         {
-            DisPlayTextUnder = eq.getResult();
+            DisPlayTextUnder =AddFormat.Addformat(eq.getResult()) ;
             DisPlayTextTop = "";
             Cache.topCache = "";
 
@@ -411,13 +421,52 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void MS()
         {
+            //his.AddStorage();
+            mem.MSChange(DisPlayTextUnder);
+
             Memory.Clear();
-            myMemory.mymemory.Add(MainWindowsViewModel._disPlayTextUnder);
-            Console.WriteLine();
-            foreach (var item in Memory)
+            foreach (var item in mem.GetMemory())
+
+            {
+                Memory.Insert(0, item);
+
+            }
+        }
+        private void MC()
+        {
+            mem.MSClear();
+            Memory.Clear();
+            foreach (var item in mem.GetMemory())
 
             {
 
+                Memory.Insert(0, item);
+
+            }
+        }
+        private void MR()
+        {
+            DisPlayTextUnder = mem.GetMemory().Last();
+        }
+        private void MMinus()
+        {
+            mem.MSMinus(DisPlayTextUnder);
+            Memory.Clear();
+            foreach (var item in mem.GetMemory())
+
+            {
+                Memory.Insert(0, item);
+
+            }
+
+        }
+        private void MPlus()
+        {
+            mem.MSPlus(DisPlayTextUnder);
+            Memory.Clear();
+            foreach (var item in mem.GetMemory())
+
+            {
                 Memory.Insert(0, item);
 
             }

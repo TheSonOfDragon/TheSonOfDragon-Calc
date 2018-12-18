@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace WPFMVVMDemo.ViewModel.History
+namespace Memory
 {
     //历史记录zb
    public class History_Memory
