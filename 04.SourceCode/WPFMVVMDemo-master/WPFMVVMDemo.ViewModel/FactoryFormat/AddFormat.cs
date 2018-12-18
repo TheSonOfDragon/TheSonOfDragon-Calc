@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFMVVMDemo.ViewModel
 {
+    //11111111
     static class AddFormat
         //用于结果去零，去余的格式化操作  同步到dev123111111111111111111111111111111111111111111
     {
