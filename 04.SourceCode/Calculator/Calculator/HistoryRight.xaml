@@ -4,22 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Calculator"
-             mc:Ignorable="d" Height="438" Width="330">
-    <Grid>
+             mc:Ignorable="d" Height="438" Width="330" Background="#FFE6E6E6">
+    <Grid x:Name="HisGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="57*"/>
-            <RowDefinition Height="381*"/>
+            <RowDefinition Height="57"/>
+            <RowDefinition Height="169*"/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="85*"/>
                 <ColumnDefinition Width="86*"/>
                 <ColumnDefinition Width="158*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="历史记录"/>
-            <Button Content="内存" Grid.Column="1"/>
+            <Button Style="{StaticResource HMButton}" Uid="历史记录" BorderBrush="{x:Null}" Background="#FFF0F0F0" Click="Button_Click"/>
+            <Button Style="{StaticResource HMButton}" Uid="内存" Grid.Column="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" Click="Button_Click_1"/>
 
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="HistoryC">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <ListBox Background="#FFE6E6E6" x:Name="listbox1">
+                
+            </ListBox>
+            <Button Content="1111" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="MemoryC">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <ListBox Background="#FFE6E6E6" x:Name="listbox2">
+
+            </ListBox>
+            <Button Content="222222" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+
+            </Button>
         </Grid>
     </Grid>
 

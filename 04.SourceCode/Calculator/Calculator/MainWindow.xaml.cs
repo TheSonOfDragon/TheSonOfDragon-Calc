@@ -1,38 +1,9 @@
-﻿//
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//
-//
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//
-//               佛祖保佑         永无BUG
-//
-//
-//
+﻿
 using MahApps.Metro.Controls;
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
 
 namespace Calculator
 {
@@ -45,7 +16,7 @@ namespace Calculator
         {
             InitializeComponent();
             this.SizeChanged += new System.Windows.SizeChangedEventHandler(MainWindow_Resize);
-
+            
         }
 
         #region 标题栏所有事件
@@ -135,13 +106,32 @@ namespace Calculator
             }
         }
 
+
+        #region 设置拉动添加控件
+        HistoryRight historyRight = new HistoryRight();
+        ColumnDefinition col = new ColumnDefinition();
+        bool isSized = false;
         private void MainWindow_Resize(object sender, System.EventArgs e)
         {
-            if (this.Width>=700)
+            if (this.Width>=700&&(!isSized))
             {
-                Window.
+                Grid1.ColumnDefinitions.Add(col);
+                historyRight.Name = "historyRight";
+                Grid1.Children.Add(historyRight);
+                historyRight.SetValue(Grid.RowProperty, 0);
+                historyRight.SetValue(Grid.RowSpanProperty, 4);
+                historyRight.SetValue(Grid.ColumnProperty, 2);
+                col.Width = new GridLength(330);
+                isSized = true;
+            }
+            else if (isSized&&this.Width<700)
+            {
+                Grid1.ColumnDefinitions.RemoveAt(2);
+                Grid1.Children.Remove(historyRight);
+                isSized = false;
             }
 
         }
+        #endregion
     }
 }

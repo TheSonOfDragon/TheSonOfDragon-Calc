@@ -51,5 +51,22 @@ namespace Calculator
         {
             InitializeComponent();
         }
+
+        public static implicit operator ColumnDefinition(HistoryRight v)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.MemoryC.Visibility = Visibility.Hidden;
+            this.HistoryC.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.HistoryC.Visibility = Visibility.Hidden;
+            this.MemoryC.Visibility = Visibility.Visible;
+        }
     }
 }
