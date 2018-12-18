@@ -16,13 +16,13 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeEqual = true;
             Cache.judgeTurn = true;
             Cache.judgeNewInp = true;
-            if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew =="")
+            if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew =="")//直接等于
             {
                 Cache.resultCache =Cache.underCache;
-            }else if("".Equals(Cache.operatorCacheNew)){
+            }else if("".Equals(Cache.operatorCacheNew)){//单目后等于
                 Cache.resultCache = Cache.underCache;
             }
-            else if (Cache.judgeNewInp && !Cache.judgeTurn)
+            else if (Cache.judgeNewInp && !Cache.judgeTurn)//混合等于
             {
                 Cache.resultCache = MainWindowsViewModel._disPlayTextUnder;
             switch (Cache.operatorCacheNew)
@@ -41,7 +41,7 @@ namespace WPFMVVMDemo.ViewModel
                     break;
             }
             }
-            else
+            else//最后一位运算符
             {
                 switch (Cache.operatorCacheNew)
                 {

@@ -202,6 +202,26 @@ namespace WPFMVVMDemo.ViewModel
         {
             get => btn_ms;
         }
+        private readonly NVCommand btn_mc;
+        public NVCommand Btn_mc
+        {
+            get => btn_mc;
+        }
+        private readonly NVCommand btn_mr;
+        public NVCommand Btn_mr
+        {
+            get => btn_mr;
+        }
+        private readonly NVCommand btn_minus;
+        public NVCommand Btn_minus
+        {
+            get => btn_minus;
+        }
+        private readonly NVCommand btn_plus;
+        public NVCommand Btn_plus
+        {
+            get => btn_plus;
+        }
         public MainWindowsViewModel()
         {
             _addCommand = new NVCommand(AddHandler);
@@ -230,7 +250,10 @@ namespace WPFMVVMDemo.ViewModel
             _equalsCommand = new NVCommand(EqualsHandler);
             _dotCommand = new NVCommand(DotHandler);
             btn_ms = new NVCommand(MS);
-
+            btn_mc = new NVCommand(MC);
+            btn_mr = new NVCommand(MR);
+            btn_minus = new NVCommand(MMinus);
+            btn_plus = new NVCommand(MPlus);
         }
 
         private void AddHandler()

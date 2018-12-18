@@ -11,6 +11,7 @@ namespace Memory
 
         public void MSChange(string num)
         {
+            Cache.judgeNewInp = true;
             mymemory.Add(num);
         }
         public List<string> GetMemory()
@@ -24,9 +25,10 @@ namespace Memory
         }
         public void MSMinus(string num)
         {
+            Cache.judgeNewInp = true;
             if (mymemory.Count == 0)
             {
-                mymemory.Add("0");
+                mymemory.Add("-"+Cache.underCache);
             }
             else
             {
@@ -36,9 +38,10 @@ namespace Memory
         }
         public void MSPlus(string num)
         {
+            Cache.judgeNewInp = true;
             if (mymemory.Count == 0)
             {
-                mymemory.Add("0");
+                mymemory.Add(Cache.underCache);
             }
             else
             {

@@ -293,6 +293,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     break;
             }
+            Cache.underCache = AddFormat.Addformat(Cache.underCache);
             return Cache.topCache;
 
         }
