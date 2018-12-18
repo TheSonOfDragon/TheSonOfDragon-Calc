@@ -15,6 +15,8 @@ namespace WPFMVVMDemo.ViewModel.Symbol
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
         {
+            Cache.underCache = AddFormat.Addformat(Cache.underCache);
+            Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
             Cache.judgeTurn = true;
             Cache.operatorCacheOld = Cache.operatorCacheNew;
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
