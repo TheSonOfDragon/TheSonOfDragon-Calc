@@ -402,7 +402,7 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void EqualsHandler()//等于
         {
-            DisPlayTextUnder = eq.getResult();
+            DisPlayTextUnder =AddFormat.Addformat(eq.getResult()) ;
             DisPlayTextTop = "";
             Cache.topCache = "";
 

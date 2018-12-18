@@ -22,7 +22,6 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
                 Cache.operatorCacheOld = "";
                 Cache.resultCache = "";
-                Cache.judgeEqual = false;
             }
             // if else判断
             #region
@@ -44,7 +43,14 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     Cache.judgeTurn = false;
                     if (Cache.judgeSinge)//对结果进行单目，不需要将结果传上去
                     {
+                        if (Cache.judgeEqual)
+                        {
+                            Cache.topCache += Cache.underCache + opt;
+                        }
+                        else
+                        {
                         Cache.topCache += opt;
+                        }
                     }
                     else
                     {
@@ -83,7 +89,8 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.Length - 1) + opt;
                 }
                 }
-#endregion 
+            #endregion
+            Cache.judgeEqual = false;
             return Cache.topCache;
             }
 
