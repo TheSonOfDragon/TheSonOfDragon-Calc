@@ -22,9 +22,13 @@ namespace WPFMVVMDemo.ViewModel.Symbol
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
-                Cache.resultCache = "";
                 Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+                Cache.resultCache = "";
+                Cache.judgeTurn = true;
+                Cache.judgeSinge = false;
                 Cache.judgeEqual = false;
+                Cache.judgeMinus = true;
             }
             switch (single)
             {
@@ -170,6 +174,10 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         {
                             int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
                             string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                            if (str == "")
+                            {
+                                str = MainWindowsViewModel._disPlayTextUnder;
+                            }
                             Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
                             Cache.underCache = CO.Minus(Cache.underCache);
                         }
@@ -293,6 +301,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     break;
             }
+            Cache.underCache = AddFormat.Addformat(Cache.underCache);
             return Cache.topCache;
 
         }

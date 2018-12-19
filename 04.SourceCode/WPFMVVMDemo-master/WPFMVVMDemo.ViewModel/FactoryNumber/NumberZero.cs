@@ -11,6 +11,17 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
     {
         public string JudgeZero()
         {
+            if (Cache.judgeEqual)
+            {
+                Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+                Cache.resultCache = "";
+                Cache.judgeTurn = true;
+                Cache.judgeSinge = false;
+                Cache.judgeEqual = false;
+                Cache.judgeMinus = true;
+
+            }
             //单目后直接输入数字
             if (MainWindowsViewModel._disPlayTextTop != "")
             {

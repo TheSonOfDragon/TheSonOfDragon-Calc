@@ -56,7 +56,32 @@ namespace WPFMVVMDemo.ViewModel
             //整数部分3个以下不需要加逗号
             if (integer.Length <= 3)
                 return;
-
+            if (integer.Contains("-"))
+            {
+                integer = integer.Substring(1, integer.Length-1);
+                char[] strs = integer.ToCharArray();
+                List<char> list = new List<char>();
+                int len = strs.Length;
+                for (int i = 0; i < len; i++)
+                {
+                    list.Add(strs[i]);
+                }
+                int index = len / 3 - 1;
+                for (int i = 0; i <= index; i++)
+                {
+                    if ((len % 3 == 0) && i == 0)
+                        continue;
+                    if ((len % 3 == 0) && i != 0)
+                    {
+                        list.Insert(i * 3 + i - 1, ',');
+                        continue;
+                    }
+                    list.Insert(len % 3 + i * 3 + i, ',');
+                }
+                integer = string.Join("", list.ToArray());
+                integer = "-" + integer;
+            }
+            else {
             char[] strs = integer.ToCharArray();
             List<char> list = new List<char>();
             int len = strs.Length;
@@ -77,6 +102,7 @@ namespace WPFMVVMDemo.ViewModel
                 list.Insert(len % 3 + i * 3 + i, ',');
             }
             integer = string.Join("", list.ToArray());
+            }
         }
     }
 }

@@ -8,13 +8,21 @@ using System.Threading.Tasks;
 
 namespace Memory
 {
-    //历史记录zb
-   public class History_Memory
-    {
-        
-        List<string> list = new List<string>();
+    //历史记录
+    public class History
 
-        public void AddStorage() { }
+    {
+
+        List<string> myhistory = new List<string>();
+
+        public void AddHistory(string num)
+        {
+            myhistory.Add(num);
+        }
+        public List<string> GetHistory()
+        {
+            return myhistory;
+        }
         public void Remove() { }
         public void clear() { }
     }

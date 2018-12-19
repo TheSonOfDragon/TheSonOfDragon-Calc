@@ -12,11 +12,34 @@ namespace Operation
 
         public string Sqrt(string num1)
         {
-            return Math.Sqrt(Convert.ToDouble(num1)).ToString();
+            /*
+            decimal x = Convert.ToDecimal(num1) / 3;
+            decimal lastX = 0m;
+            for (int i = 0; i < 50; i++)
+            {
+                x = (Convert.ToDecimal(num1) / (x * 2)) + (x / 2);
+                if (x == lastX) break;
+                lastX = x;
+            }
+            return x.ToString();
+            */
+            decimal x, y;
+            x = 0;
+            y = Convert.ToDecimal(num1) / 2;
+            while (x != y)
+            {
+                x = y;
+                y = (x + Convert.ToDecimal(num1) / x) / 2;
+            }
+            return x.ToString();
         }
         public string Squ(string num1)
         {
-            return Math.Pow(Convert.ToDouble(num1), 2).ToString();
+            return (Convert.ToDecimal(num1) * Convert.ToDecimal(num1)).ToString();
+        }
+        public string Cube(string num1)
+        {
+            return (Convert.ToDecimal(num1) * Convert.ToDecimal(num1) * Convert.ToDecimal(num1)).ToString();
         }
         public string OneCent(string num1)
         {
