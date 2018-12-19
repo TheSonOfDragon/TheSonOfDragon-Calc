@@ -14,9 +14,9 @@ namespace WPFMVVMDemo.ViewModel
         Memory.History his = new Memory.History();
         public string getResult()
         {
-            Cache.judgeEqual = true;
-            Cache.judgeTurn = true;
-            Cache.judgeNewInp = true;
+            //Cache.judgeEqual = true;
+            //Cache.judgeTurn = true;
+            //Cache.judgeNewInp = true;
             
             if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew =="")//直接等于
             {

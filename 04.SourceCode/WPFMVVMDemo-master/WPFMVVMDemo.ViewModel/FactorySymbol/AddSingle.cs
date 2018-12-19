@@ -174,6 +174,10 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         {
                             int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
                             string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                            if (str == "")
+                            {
+                                str = MainWindowsViewModel._disPlayTextUnder;
+                            }
                             Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
                             Cache.underCache = CO.Minus(Cache.underCache);
                         }
