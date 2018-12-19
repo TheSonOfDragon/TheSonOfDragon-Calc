@@ -19,9 +19,9 @@ namespace WPFMVVMDemo.ViewModel
             {
                 underCache = underCache.Substring(0, 19);
             }
-            else if (!underCache.Contains("-") && underCache.Contains(".") && underCache.Length >= 18)
+            else if (!underCache.Contains("-") && underCache.Contains(".") && underCache.Length >= 16)
             {
-                underCache = underCache.Substring(0, 18);
+                underCache = underCache.Substring(0, 16);
             }
             else if (underCache.Contains("-") && !underCache.Contains(".") && underCache.Length >= 17)
             {

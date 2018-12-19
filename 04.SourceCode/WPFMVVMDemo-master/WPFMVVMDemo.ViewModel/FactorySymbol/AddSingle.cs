@@ -12,12 +12,14 @@ namespace WPFMVVMDemo.ViewModel.Symbol
     {
         Complex_Operation CO = new Complex_Operation();
         AddSymbol sy = new AddSymbol();
+        
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
         {
             Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
             Cache.judgeTurn = true;
             Cache.operatorCacheOld = Cache.operatorCacheNew;
+            Cache.count++;
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;

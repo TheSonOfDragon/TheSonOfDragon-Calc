@@ -19,8 +19,8 @@ namespace WPFMVVMDemo.ViewModel
     {
         //指当前输出屏幕的所有内容 
         public static string _disPlayTextUnder="0";
-        public static string _disPlayTextTop = "";     
-        
+        public static string _disPlayTextTop = "";
+        string stri;
 
         AddNumber.NumberOneToNine addNum = new AddNumber.NumberOneToNine();
         AddNumber.NumberZero addNum0 = new AddNumber.NumberZero();
@@ -379,7 +379,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeSinge = false;
             Cache.judgeEqual = false;
             Cache.judgeMinus = true;
-
+            Cache.count = 0;
         }
             #region CE
         private void ClearPreHandler()//CE键退一步操作
@@ -426,42 +426,119 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void EqualsHandler()//等于
         {
-            DisPlayTextUnder =AddFormat.Addformat(eq.getResult()) ;
+            DisPlayTextUnder = AddFormat.Addformat(eq.getResult());
+            if ("".Equals(Cache.operatorCacheNew))
+
+            {
+                if ("".Equals(Cache.underCache))
+                {
+                    his.AddHistory("0" + "=" + "0");
+                    History.Clear();
+                    foreach (var item in his.GetHistory())
+                    {
+                        History.Insert(0, item);
+                    }
+                }
+                else
+                {
+
+                    if (Cache.judgeSinge)
+                    {
+                        his.AddHistory(Cache.topCache + "=" + Cache.underCache);
+                        History.Clear();
+                        foreach (var item in his.GetHistory())
+                        {
+                            History.Insert(0, item);
+                        }
+                        Cache.judgeSinge = false;
+
+                    }
+                    else
+                    {
+                        his.AddHistory(DisPlayTextUnder + "=" + DisPlayTextUnder);
+                        History.Clear();
+                        foreach (var item in his.GetHistory())
+                        {
+                            History.Insert(0, item);
+                        }
+                    }
+
+
+                }
+            }
+            else
+            {
+                if (!"".Equals(DisPlayTextTop))
+                {
+                    if (Cache.count > 1)
+                    {
+                        his.AddHistory(Cache.topCache + "=" + DisPlayTextUnder);
+                        History.Clear();
+                        foreach (var item in his.GetHistory())
+                        {
+                            History.Insert(0, item);
+                        }
+                        Cache.judgeSinge = false;
+                    }
+                    else
+                    {
+                        if (Cache.judgeTurn && Cache.judgeNewInp)
+                        {
+                            his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
+                        }
+                        else
+                        {
+                            his.AddHistory(DisPlayTextTop + Cache.underCache + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+
+                    switch (Cache.operatorCacheNew)
+                    {
+                        case "＋":
+                            stri = (Convert.ToDecimal(Cache.resultCache) - Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                        case "－":
+                            stri = (Convert.ToDecimal(Cache.resultCache) + Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                        case "×":
+                            stri = (Convert.ToDecimal(Cache.resultCache) / Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                        case "÷":
+                            stri = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                    }
+
+                    his.AddHistory(stri + Cache.operatorCacheNew + Cache.underCache + "=" + DisPlayTextUnder);
+                    History.Clear();
+                    foreach (var item in his.GetHistory())
+                    {
+                        History.Insert(0, item);
+                    }
+                }
+
+
+            }
+
+            DisPlayTextTop = "";
+            Cache.topCache = "";
             Cache.judgeEqual = true;
             Cache.judgeTurn = true;
             Cache.judgeNewInp = true;
-            if (MainWindowsViewModel._disPlayTextTop == "" && Cache.operatorCacheNew == "")//直接等于
-            {
-                his.AddHistory(Cache.resultCache + "=" + Cache.resultCache);
-            }
-            else if ("".Equals(Cache.operatorCacheNew))
-            {//单目后等于
-
-            }
-            else if (Cache.judgeNewInp && !Cache.judgeTurn)//混合等于
-            {
-
-            }
-            else//最后一位运算符
-            {
-                if (_disPlayTextTop != "")
-                {
-                his.AddHistory(_disPlayTextTop+ Cache.underCache + "=" + Cache.resultCache);
-
-                }else
-                {
-                his.AddHistory(_disPlayTextUnder + Cache.operatorCacheNew + Cache.underCache + "=" + Cache.resultCache);
-                }
-            }
-            History.Clear();
-            foreach (var item in his.GetHistory())
-
-            {
-                History.Insert(0, item);
-
-            }
-            DisPlayTextTop = "";
-            Cache.topCache = "";
+            Cache.count = 0;
 
         }
         private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };
