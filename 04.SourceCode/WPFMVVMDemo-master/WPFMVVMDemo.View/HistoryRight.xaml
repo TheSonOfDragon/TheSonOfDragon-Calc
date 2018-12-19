@@ -40,7 +40,7 @@
                 <RowDefinition Height="105*"/>
                 <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
-            <ListBox Background="#FFE6E6E6" x:Name="listbox2" ItemsSource="{Binding Memory}">
+            <ListBox Background="#FFE6E6E6" x:Name="listbox2" ItemsSource="{Binding Memory}" >
 
             </ListBox>
             <Button Content="222222" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom">

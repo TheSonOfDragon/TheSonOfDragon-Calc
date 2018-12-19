@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="322" Background="#FFE6E6E6">
     <Grid MinHeight="300" MinWidth="322">
         <ScrollViewer>
-            <ListBox Background="#FFE6E6E6" Margin="0"></ListBox>
+            <ListBox Background="#FFE6E6E6" Margin="0" ItemsSource="{Binding History}"></ListBox>
         </ScrollViewer>
     </Grid>
 </UserControl>
