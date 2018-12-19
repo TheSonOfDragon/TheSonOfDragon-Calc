@@ -1,98 +1,157 @@
-﻿<Window x:Class="WPFMVVMDemo.View.MainWindow"
+﻿<metro:MetroWindow
+    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls" 
+    x:Class="WPFMVVMDemo.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFMVVMDemo.View"
-        
         mc:Ignorable="d"
-        
-       Title="计算器" Height="627" Width="704" Visibility="Visible" BorderThickness="0" Foreground="#FF474747"
-        MinWidth="366" MinHeight="509">
-    <Window.Background>
-        <SolidColorBrush Color="#FFE9E9E9" Opacity="0.8"/>
-    </Window.Background>
-    <Window.Effect>
-        <DropShadowEffect Color="#FFE9E9E9" ShadowDepth="15"/>
-    </Window.Effect>
+        Title="MainWindow" Height="502" Width="322" MinHeight="502" MinWidth="322" UseNoneWindowStyle="True" Padding="0" Background="#FFE6E6E6" ResizeMode="CanResizeWithGrip" 
+        BorderThickness="1,1,1,1" BorderBrush="Black">
 
-    <Grid Background="#FFE9E9E9">
-        <Button Content="" Name="button1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="40" FontSize="24" BorderThickness="0"  Cursor="Hand"  >
-            <Button.Background>
-                <ImageBrush ImageSource="E:\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\caidan1.png" Stretch="Fill"/>
-            </Button.Background>
-        </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="45,7,0,0" TextWrapping="Wrap" Text="标准" VerticalAlignment="Top" Height="40" FontSize="18" />
-        <Grid>
+    <metro:MetroWindow.Flyouts>
+        <metro:FlyoutsControl>
+            <metro:Flyout x:Name="leftFlyout" Position="Left" Visibility="Collapsed" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed" IsPinned="False">
+                <local:left/>
+            </metro:Flyout>
+            <metro:Flyout x:Name="bottomFlyout" Position="Bottom" Visibility="Collapsed" TitleVisibility="Collapsed" CloseButtonVisibility="Collapsed" IsPinned="False">
+                <local:HistoryBottom/>
+            </metro:Flyout>
+        </metro:FlyoutsControl>
+    </metro:MetroWindow.Flyouts>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--#region 标题栏 -->
+        <Grid x:Name="TitleBar" MouseMove="TitleBar_MouseMove" MouseDown="TitleBar_MouseDown" Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="158*"/>
+                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="45"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="9" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding InverseCommand}">±</Button>
-            <Button Grid.Column="1" Grid.Row="9" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num0Command}">0</Button>
-            <Button Grid.Column="2" Grid.Row="9" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" FontWeight="Bold" Command="{Binding DotCommand}">.</Button>
-            <Button Grid.Column="3" Grid.Row="9" FontSize="33" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding EqualsCommand}" FontFamily="微软雅黑 Light">=</Button>
-            <Button Grid.Column="0" Grid.Row="8" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num1Command}">1</Button>
-            <Button Grid.Column="1" Grid.Row="8" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num2Command}">2</Button>
-            <Button Grid.Column="2" Grid.Row="8" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num3Command}">3</Button>
-            <Button Grid.Column="3" Grid.Row="8" FontSize="33" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding AddCommand}" FontFamily="微软雅黑 Light">+</Button>
-            <Button Grid.Column="0" Grid.Row="7" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num4Command}">4</Button>
-            <Button Grid.Column="1" Grid.Row="7" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num5Command}">5</Button>
-            <Button Grid.Column="2" Grid.Row="7" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num6Command}">6</Button>
-            <Button Grid.Column="3" Grid.Row="7" FontSize="33" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding SubtractCommand}" FontFamily="微软雅黑 Light">-</Button>
-            <Button Grid.Column="0" Grid.Row="6" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num7Command}">7</Button>
-            <Button Grid.Column="1" Grid.Row="6" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num8Command}">8</Button>
-            <Button Grid.Column="2" Grid.Row="6" Background="#FFFAFAFA" FontSize="24" BorderThickness="0.3" FontWeight="Bold" Command="{Binding Num9Command}">9</Button>
-            <Button Grid.Column="3" Grid.Row="6" FontSize="33" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding MultiplyCommand}" FontFamily="微软雅黑 Light">×</Button>
-            <Button Grid.Column="0" Grid.Row="5" FontSize="20" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding ClearPreCommand}" FontFamily="微软雅黑 Light">CE</Button>
-            <Button Grid.Column="1" Grid.Row="5" FontSize="20" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding ClearAllCommand}" FontFamily="微软雅黑 Light">C</Button>
-
-            <Button Margin="0,0,0,0" BorderThickness="0"  Grid.Column="2" Grid.Row="5"  Background="#FFF0F0F0" Command="{Binding DelCommand}">
-                <Image Source="E:\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\caidan7.png"  Stretch="None" Margin="-20,0,-10,0"/>
-            </Button>
-            <Button Grid.Column="3" Grid.Row="0" BorderThickness="0" Background="#FFE9E9E9" >
-                <Image Source="E:\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\caidan123.png"  Stretch="None" Height="44" Margin="20,-5,0,0" />
-
-            </Button>
-            <Button Grid.Column="3" Grid.Row="5" FontSize="33" Background="#FFF0F0F0" BorderThickness="0.3" Command="{Binding DivideCommand}" FontFamily="微软雅黑 Light">÷</Button>
-            <Button Grid.Column="0" Grid.Row="4" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" FontFamily="微软雅黑 Light" Command="{Binding PercentOneCommand}" >%</Button>
-            <Button Grid.Column="1" Grid.Row="4" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" FontFamily="微软雅黑 Light" Command="{Binding RadicalCommand}">√</Button>
-            <Button Grid.Column="2" Grid.Row="4" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" FontFamily="Vivaldi" Command="{Binding SquareCommand}">x²</Button>
-            <Button Grid.Column="3" Grid.Row="4" FontSize="24" Background="#FFF0F0F0" BorderThickness="0.3" FontFamily="Vivaldi" Command="{Binding ReciprocalCommand}">¹/x</Button>
-            <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Background="#FFE9E9E9"  Text="{Binding DisPlayTextTop}" FontSize="12" TextAlignment="Right" ></TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Background="#FFE9E9E9"  Text="{Binding DisPlayTextUnder}" FontSize="24" TextAlignment="Right" FontWeight="Bold" ></TextBlock>
-            <Button Content="MC" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="41" Background="#FFE9E9E9" BorderThickness="0" Height="16"  />
-            <Button Grid.Column="4" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="历史记录" Click="Button_Click" FontWeight="Bold" />
-            <Button Grid.Column="5" Grid.Row="0"  FontSize="14" Background="#FFE9E9E9" BorderThickness="0" Content="内存" Click="Button_Click_1" FontWeight="Bold" />
-            <ListBox x:Name="listhistory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
-                <Image Source="E:\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\line1.png" Width="101" ></Image>
-                <TextBlock Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Text="尚无历史记录"></TextBlock>
-            </ListBox>
-            <ListBox x:Name="listmemory" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="9" FontSize="12" Background="#FFE9E9E9" BorderThickness="0.3" Visibility="Visible"   >
-                <Image Source="E:\TheSonOfDragon-Calc\04.SourceCode\WPFMVVMDemo-master\line2.png" Height="5" Width="189"/>
-                <TextBlock Text="内存中没有内容 " />
-            </ListBox>
-            <Button Content="MR" HorizontalAlignment="Left" Margin="83,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="48" Background="#FFE9E9E9" BorderThickness="0" Height="16" Grid.ColumnSpan="2"  />
-            <Button Content="M-" HorizontalAlignment="Left" Margin="69,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="44" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="2" Height="16" Grid.ColumnSpan="2"  />
-            <Button Content="MS" HorizontalAlignment="Left" Margin="54,17,0,0" Grid.Row="3" Width="36" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="3" Command="{Binding Btn_ms}"  />
-            <Button Content="M+" HorizontalAlignment="Left" Margin="79,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="42" Background="#FFE9E9E9" BorderThickness="0" Grid.Column="1" Height="16" Grid.ColumnSpan="2"  />
+            <TextBlock Name="txtTitle" Margin="0,0,0,0" Text="    计算器" Height="15" FontSize="10"/>
+            <Button x:Name="btn_min" Style="{StaticResource TitleStyle}" Content="－"  Grid.Column="2" Width="45" Click="Btn_min_Click" FontSize="15"/>
+            <Button x:Name="btn_max" Style="{StaticResource TitleStyle}" Content="□" Grid.Column="3" Width="45" Click="Btn_max_Click" FontSize="15"/>
+            <Button x:Name="btn_close" Style="{StaticResource CloseStyle}" Content="×" Grid.Column="4" Width="45" Click="Btn_close_Click" FontSize="15"/>
         </Grid>
+        <!--#endregion-->
+
+        <Grid Grid.Row="1" x:Name="Grid1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="94*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="298*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Top -->
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="222*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="≡" Margin="0" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontSize="24" Click="Button_Click" FontFamily="Microsoft YaHei UI Light"/>
+                <Button Content="Button" Grid.Column="3" Margin="0" BorderBrush="{x:Null}" Background="#FFE6E6E6" Click="Button_Click_1"/>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region 输入框 -->
+            <TextBlock x:Name="text1" Text="{Binding DisPlayTextUnder}" Grid.Row="1" Margin="65,36,9.6,4.6" FontSize="24" TextAlignment="Right" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="text2" Text="{Binding DisPlayTextTop}" Grid.Row="1" Margin="80,5,9.6,57.6" FontSize="12" TextAlignment="Right"></TextBlock>
+
+            <!--#endregion-->
+
+            <!--#region 内存 -->
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0.4,-0.4,0.4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="MC" Style="{StaticResource MemoryStyle}" FontSize="10" Margin="0" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontWeight="Bold" FontFamily="Microsoft YaHei UI" Height="28" VerticalAlignment="Bottom"/>
+                <Button Content="MR" Command="{Binding Btn_mr}" Style="{StaticResource MemoryStyle}" FontSize="10" Margin="0" Grid.Column="1" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontWeight="Bold" FontFamily="Microsoft YaHei UI"/>
+                <Button Content="M+" Command="{Binding Btn_plus}" Style="{StaticResource MemoryStyle}" FontSize="10" Margin="0" Grid.Column="2" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontWeight="Bold" FontFamily="Microsoft YaHei UI"/>
+                <Button Content="M-" Command="{Binding Btn_minus}" Style="{StaticResource MemoryStyle}" FontSize="10" Margin="0" Grid.Column="3" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontWeight="Bold" FontFamily="Microsoft YaHei UI"/>
+                <Button Content="MS" Command="{Binding Btn_ms}" Style="{StaticResource MemoryStyle}" FontSize="10" Margin="0" Grid.Column="4" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontWeight="Bold" FontFamily="Microsoft YaHei UI"/>
+                <Button Content="M" x:Name="ShowMemory" Style="{StaticResource MemoryStyle}" FontSize="10" Margin="0.4,0,-0.4,0" Grid.Column="5" BorderBrush="{x:Null}" Background="#FFE6E6E6" FontWeight="Bold" FontFamily="Microsoft YaHei UI" Height="28" VerticalAlignment="Top"/>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region 主界面 -->
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,28.4,-0.4,0.4" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num1Command}" Content="1" FontSize="22" Margin="4,0,0,2" Grid.Row="4" FontWeight="SemiBold"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num2Command}" Content="2" FontSize="22" FontWeight="SemiBold" Grid.Column="1" Margin="2,0,0,2" Grid.Row="4"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num3Command}" Content="3" FontSize="22" FontWeight="SemiBold" Grid.Column="2" Margin="0,0,0,2" Grid.Row="4"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num4Command}" Content="4" FontSize="22" FontWeight="SemiBold" Margin="4,0,0,2" Grid.Row="3"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num5Command}" Content="5" FontSize="22" FontWeight="SemiBold" Grid.Column="1" Margin="2,0,0,2" Grid.Row="3"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num6Command}" Content="6" FontSize="22" FontWeight="SemiBold" Grid.Column="2" Margin="0,0,0,2" Grid.Row="3"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num7Command}" Content="7" FontSize="22" FontWeight="SemiBold" Margin="4,0,0,2" Grid.Row="2"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num8Command}" Content="8" FontSize="22" FontWeight="SemiBold" Grid.Column="1" Margin="2,0,0,2" Grid.Row="2"/>
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num9Command}" Content="9" FontSize="22" FontWeight="SemiBold" Grid.Column="2" Margin="0,0,0,2" Grid.Row="2"/>
+
+                <Button Style="{StaticResource NumStyle}" Command="{Binding Num0Command}" Content="0" FontSize="22" FontWeight="SemiBold" Grid.Column="1" Margin="2,0,0,4" Grid.Row="5"/>
+
+                <Button Content="＋" Command="{Binding AddCommand}" Style="{StaticResource SysColor}" Grid.Column="3" Margin="2,0,4,2" Grid.Row="4" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="28" FontWeight="Light"/>
+                <Button Content="－" Command="{Binding SubtractCommand}" Style="{StaticResource SysColor}" Grid.Column="3" Margin="2,0,4,2" Grid.Row="3" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="28" FontWeight="Light"/>
+                <Button Content="×" Command="{Binding MultiplyCommand}" Style="{StaticResource SysColor}" Grid.Column="3" Margin="2,0,4,2" Grid.Row="2" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="28" FontWeight="Light"/>
+                <Button Content="÷" Command="{Binding DivideCommand}" Style="{StaticResource SysColor}" Grid.Column="3" Margin="2,0,4,2" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="28" FontWeight="Light"/>
+
+                <Button Content="CE" Command="{Binding ClearPreCommand}" Style="{StaticResource SymStyle}" Margin="4,0,0,2" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="18" FontFamily="Microsoft YaHei UI Light"/>
+                <Button Content="C" Command="{Binding ClearAllCommand}" Style="{StaticResource SymStyle}" Grid.Column="1" Margin="2,0,0,2" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="18" FontFamily="Microsoft YaHei UI Light"/>
+                <Button Content="DEL" Command="{Binding DelCommand}" Style="{StaticResource SymStyle}" Grid.Column="2" Margin="0,0,0,2" Grid.Row="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="18" FontFamily="Microsoft YaHei UI Light"/>
+
+                <Button Content="%" x:Name="percent" Command="{Binding PercentOneCommand}" Style="{StaticResource SymStyle}" Margin="4,2,0,2" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="20" FontWeight="Light"/>
+                <Button Content="√" Command="{Binding RadicalCommand}" Style="{StaticResource SymStyle}" Margin="2,2,0,2" Grid.Column="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="20" FontWeight="Light"/>
+                <Button Content="x²" Command="{Binding SquareCommand}" Style="{StaticResource SymStyle}" Grid.Column="2" Margin="0,2" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="20" FontWeight="Light"/>
+                <Button Content="1/x" Command="{Binding ReciprocalCommand}" Style="{StaticResource SymStyle}" Grid.Column="3" Margin="2,2,4,2" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="20" FontWeight="Light"/>
+                <Button Content="±" Command="{Binding InverseCommand}" Style="{StaticResource SymStyle}" Margin="4,0,0,4" Grid.Row="5" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="28" FontWeight="Light"/>
+
+                <Button Content="." Command="{Binding DotCommand}" Style="{StaticResource SymStyle}" Grid.Column="2" Margin="0,0,0,4" Grid.Row="5" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="32"/>
+
+                <Button Content="＝" Command="{Binding EqualsCommand}" Style="{StaticResource SysColor}" Grid.Column="3" Margin="2,0,4,4" Grid.Row="5" BorderBrush="{x:Null}" Background="#FFF0F0F0" FontSize="30" FontWeight="Light"/>
+            </Grid>
+            <!--#endregion-->
+
+
+        </Grid>
+
     </Grid>
-</Window>
+</metro:MetroWindow>

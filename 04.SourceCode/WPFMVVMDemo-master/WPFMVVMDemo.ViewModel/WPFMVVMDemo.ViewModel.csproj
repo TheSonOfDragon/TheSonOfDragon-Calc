@@ -31,15 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PInvoke.Kernel32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
-      <HintPath>..\packages\PInvoke.Kernel32.0.5.155\lib\net45\PInvoke.Kernel32.dll</HintPath>
-    </Reference>
-    <Reference Include="PInvoke.Windows.Core, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
-      <HintPath>..\packages\PInvoke.Windows.Core.0.5.155\lib\net35\PInvoke.Windows.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PInvoke.Windows.ShellScalingApi, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
-      <HintPath>..\packages\PInvoke.Windows.ShellScalingApi.0.5.155\lib\net45\PInvoke.Windows.ShellScalingApi.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,43 +39,38 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Validation, Version=2.4.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Validation.2.4.15\lib\net45\Validation.dll</HintPath>
-    </Reference>
     <Reference Include="XamlMVVMInfrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XamlMVVMInfrastructure.1.0.0\lib\net461\XamlMVVMInfrastructure.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Equals.cs" />
     <Compile Include="FactoryFormat\AddComma.cs" />
     <Compile Include="FactoryFormat\AddFormat.cs" />
     <Compile Include="FactoryNumber\Dot.cs" />
-    <Compile Include="Equals.cs" />
-    <Compile Include="IJudge\JudgeForSingle.cs" />
-    <Compile Include="IJudge\JudgeOperator.cs" />
-    <Compile Include="IJudge\JudgeForDot.cs" />
-    <Compile Include="IJudge\JudgeForZero.cs" />
-    <Compile Include="IJudge\JudgeForNumber.cs" />
-    <Compile Include="MainWindowsViewModel.cs" />
     <Compile Include="FactoryNumber\NumberOneToNine.cs" />
     <Compile Include="FactoryNumber\NumberZero.cs" />
     <Compile Include="FactorySymbol\AddOperator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FactorySymbol\AddSingle.cs" />
     <Compile Include="FactorySymbol\AddSymbol.cs" />
+    <Compile Include="IJudge\JudgeForDot.cs" />
+    <Compile Include="IJudge\JudgeForNumber.cs" />
+    <Compile Include="IJudge\JudgeForSingle.cs" />
+    <Compile Include="IJudge\JudgeForZero.cs" />
+    <Compile Include="IJudge\JudgeOperator.cs" />
+    <Compile Include="MainWindowsViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Memory\Memory.csproj">
-      <Project>{658c393f-5144-41cd-9971-1a65527fd67f}</Project>
+      <Project>{416b9005-35ef-40a1-8ffc-2585a06c1ae2}</Project>
       <Name>Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\Operation\Operation.csproj">
-      <Project>{c5ae2166-3c42-46da-a476-7e9917bb69a3}</Project>
+      <Project>{6cf02696-b8c4-4bd7-875b-80b8b623525b}</Project>
       <Name>Operation</Name>
     </ProjectReference>
   </ItemGroup>

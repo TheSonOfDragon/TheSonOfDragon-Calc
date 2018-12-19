@@ -4,6 +4,22 @@
              xmlns:local="clr-namespace:WPFMVVMDemo.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="./Dictionary/NumButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/SymButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/MemoryButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/CloseButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/TitleButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/RHistoryMemoryButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/HistoryItem.xaml"/>
+                <ResourceDictionary Source="./Dictionary/SysColor.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

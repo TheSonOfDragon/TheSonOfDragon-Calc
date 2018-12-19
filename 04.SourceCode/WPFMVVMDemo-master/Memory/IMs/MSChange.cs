@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace IMS
 {
-   interface MSChange
+    interface MSChange
     {
-        void MsChange();
+        void MSChange(string num);
     }
 }

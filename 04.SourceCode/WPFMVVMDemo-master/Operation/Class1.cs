@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS
+namespace Operation
 {
-    interface MSUse
+    public class Class1
     {
-        void MSUse();
     }
 }

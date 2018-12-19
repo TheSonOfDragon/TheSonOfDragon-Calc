@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IMS
 {
-  interface MSClear
+    interface MSClear
     {
         void MSClear();
     }

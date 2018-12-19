@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Memory
 {
-   public static class Cache
+    public static class Cache
     {
         //缓存顶部栏内容
         public static string topCache = "";
@@ -25,6 +25,9 @@ namespace Memory
         public static bool judgeTurn = true;
         //是否是对结果单目运算
         public static bool judgeSinge = false;
-        
+        //判断是否按过等于
+        public static bool judgeEqual = false;
+        //判断是否正负过
+        public static bool judgeMinus = true;
     }
 }

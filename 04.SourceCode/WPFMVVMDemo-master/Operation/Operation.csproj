@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5AE2166-3C42-46DA-A476-7E9917BB69A3}</ProjectGuid>
+    <ProjectGuid>{6CF02696-B8C4-4BD7-875B-80B8B623525B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Operation</RootNamespace>
     <AssemblyName>Operation</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,13 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicOpreation.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="ComplexOperation.cs" />
     <Compile Include="PercentOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Memory\Memory.csproj">
-      <Project>{658c393f-5144-41cd-9971-1a65527fd67f}</Project>
+      <Project>{416b9005-35ef-40a1-8ffc-2585a06c1ae2}</Project>
       <Name>Memory</Name>
     </ProjectReference>
   </ItemGroup>
