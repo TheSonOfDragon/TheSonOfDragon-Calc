@@ -21,14 +21,15 @@ namespace WPFMVVMDemo.ViewModel.Symbol
         {
             Cache.count++;
             Cache.judgeTurn = true;
-            Cache.judgeNewInp = true;
+
             Cache.operatorCacheOld = Cache.operatorCacheNew;
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
                 Cache.resultCache = "";
-                Cache.operatorCacheOld = "";
-                Cache.judgeEqual = false;
+                Cache.judgeTurn = true;
+                //Cache.judgeSinge = false;
+                Cache.judgeMinus = true;
             }
             switch (single)
             {
@@ -131,9 +132,10 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     //2.输入数的情况下
                     else if (!Cache.judgeSinge)
                     {
-                        Cache.topCache += ("1/(" + Cache.underCache + ")");
-                        Cache.underCache = CO.OneCent(Cache.underCache);
-                        Cache.judgeSinge = true;
+                            Cache.topCache += ("1/(" + Cache.underCache + ")");
+                            Cache.underCache = CO.OneCent(Cache.underCache);
+                            Cache.judgeSinge = true;
+                       
                     }
                     //3.Cache.judgeSinge为true即已经进行过单目运算的情况下
                     else
@@ -167,27 +169,30 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     #region
                     //如果没有新的输入，最后输入的是运算符
                     if (Cache.judgeNewInp)
+
                     {
-                        //判断是否进行过负数运算
                         if (!Cache.judgeSinge)
                         {
-                           
-                            Cache.topCache += ("negate(" + MainWindowsViewModel._disPlayTextUnder + ")");
+                            Cache.topCache += ("negate(" + Cache.underCache + ")");
                             Cache.underCache = CO.Minus(Cache.underCache);
                             Cache.judgeSinge = true;
-                        
                         }
                         else
                         {
-                            int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
-                            string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
-                            Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
-                            Cache.underCache = CO.Minus(Cache.underCache);
+                            
+                                int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                                if (str == "")
+                                {
+                                    str = MainWindowsViewModel._disPlayTextUnder;
+                                }
+                                Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
+                                Cache.underCache = CO.Minus(Cache.underCache);
+                            
                         }
                     }
                     else
                     {
-
                         if ("".Equals(Cache.underCache))
                         {
                             if (!Cache.judgeSinge)
@@ -196,10 +201,8 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                 Cache.underCache = "0";
                                 Cache.judgeSinge = true;
                             }
-                            
-
                         }
-                        else if(Cache.judgeSinge == true && "0".Equals(Cache.underCache))
+                        else if (Cache.judgeSinge == true && "0".Equals(Cache.underCache))
                         {
                             Cache.topCache = ("negate(" + Cache.topCache + ")");
                             Cache.underCache = "0";
@@ -214,17 +217,14 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                             {
                                 if (Cache.underCache.Contains("."))
                                 {
-                                    Cache.underCache = sy.GetSymbol(); 
+                                    Cache.underCache = sy.GetSymbol();
                                 }
                                 else
                                 {
                                     Cache.underCache = CO.Minus(Cache.underCache);
                                 }
-                                
                             }
-                    
                         }
-
                     }
                     break;
                 #endregion
@@ -357,6 +357,13 @@ namespace WPFMVVMDemo.ViewModel.Symbol
             }
             Cache.underCache = AddFormat.Addformat(Cache.underCache);
             Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
+            if (Cache.judgeEqual)
+            {
+                Cache.judgeEqual = false;
+                Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+            }
+            Cache.judgeNewInp = true;
             return Cache.topCache;
 
         }

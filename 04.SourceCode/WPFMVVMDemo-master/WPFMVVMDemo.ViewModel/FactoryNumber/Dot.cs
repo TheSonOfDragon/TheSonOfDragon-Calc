@@ -8,13 +8,20 @@ using Memory;
 namespace WPFMVVMDemo.ViewModel.AddNumber
 {
     public class Dot : IJudge.JudgeForDot
+
     {
         public string Judgefordot()
         {
+            if (Cache.judgeNewInp)
+            {
+                Cache.underCache = "";
+                Cache.judgeNewInp = false;
+            }
             //点.只对Cache.underCache进行操作
             if (Cache.underCache.Contains("."))
+
             {
-                return Cache.underCache;
+               return Cache.underCache;
             }
             else
             {
@@ -24,13 +31,10 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
                 }
                 else
                 {
-
-                Cache.underCache = Cache.underCache + ".";
+                    Cache.underCache = Cache.underCache + ".";
                 }
                 return Cache.underCache;
             }
-
-            }
-        
+        }
     }
 }

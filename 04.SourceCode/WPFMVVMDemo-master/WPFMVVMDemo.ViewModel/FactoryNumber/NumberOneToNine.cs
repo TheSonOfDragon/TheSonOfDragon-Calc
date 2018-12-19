@@ -11,14 +11,24 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
 
 {
     public class NumberOneToNine : IJudge.JudgeForNumber
-    {
 
+    {
         public string Judgefornumber(string number)
         {
+            if (Cache.judgeEqual)
+            {
+                Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+                Cache.resultCache = "";
+                Cache.judgeTurn = true;
+                Cache.judgeSinge = false;
+                Cache.judgeEqual = false;
+                Cache.judgeMinus = true;
+            }
             //单目后直接输入数字
             if (MainWindowsViewModel._disPlayTextTop != "")
             {
-                if (MainWindowsViewModel._disPlayTextTop.Last().ToString() == ")")
+                if (MainWindowsViewModel._disPlayTextTop.Last().ToString() == ")" || Cache.judgeSinge)
                 {
                     if (Cache.operatorCacheNew == "")
                     {

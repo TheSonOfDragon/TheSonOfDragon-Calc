@@ -20,7 +20,7 @@ namespace WPFMVVMDemo.ViewModel
         //指当前输出屏幕的所有内容 
         public static string _disPlayTextUnder = "0";
         public static string _disPlayTextTop = "";
-
+        string stri;
 
         AddNumber.NumberOneToNine addNum = new AddNumber.NumberOneToNine();
         AddNumber.NumberZero addNum0 = new AddNumber.NumberZero();
@@ -410,7 +410,7 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void EqualsHandler()
         {
-
+            
             DisPlayTextUnder = AddFormat.Addformat(eq.getResult());
             if ("".Equals(Cache.operatorCacheNew))
 
@@ -467,7 +467,7 @@ namespace WPFMVVMDemo.ViewModel
                     }
                     else
                     {
-                        if (Cache.judgeTurn)
+                        if (Cache.judgeTurn && Cache.judgeNewInp)
                         {
                             his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
                             History.Clear();
@@ -485,13 +485,29 @@ namespace WPFMVVMDemo.ViewModel
                                 History.Insert(0, item);
                             }
                         }
-                        
+
                     }
                 }
                 else
                 {
-                    string stri = (Convert.ToDecimal(Cache.resultCache) - Convert.ToDecimal(Cache.underCache)).ToString();
-                    his.AddHistory(stri + "+" + Cache.underCache + "=" + DisPlayTextUnder);
+                    
+                    switch (Cache.operatorCacheNew)
+                    {
+                        case "＋":
+                            stri = (Convert.ToDecimal(Cache.resultCache) - Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                        case "－":
+                            stri = (Convert.ToDecimal(Cache.resultCache) + Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                        case "×":
+                            stri = (Convert.ToDecimal(Cache.resultCache) / Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                        case "÷":
+                            stri = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache)).ToString();
+                            break;
+                    }
+                    
+                    his.AddHistory(stri + Cache.operatorCacheNew + Cache.underCache + "=" + DisPlayTextUnder);
                     History.Clear();
                     foreach (var item in his.GetHistory())
                     {
@@ -507,6 +523,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeEqual = true;
             Cache.judgeTurn = true;
             Cache.judgeNewInp = true;
+            Cache.count = 0;
 
         }
         private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };

@@ -45,8 +45,15 @@ namespace Operation
         }
         public string OneCent(string num1)
         {
-            
-            return (1 / Convert.ToDecimal(num1)).ToString();
+            if ("0".Equals(num1))
+            {
+                return "除数不能为零";
+            }
+            else
+            {
+                return (1 / Convert.ToDecimal(num1)).ToString();
+            }
+           
    
         }
         public string Minus(string num1)
