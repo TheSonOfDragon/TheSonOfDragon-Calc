@@ -5,20 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using Memory;
 using Operation;
+using WPFMVVMDemo.ViewModel.FactoryFormat;
 
 namespace WPFMVVMDemo.ViewModel.Symbol
 {
     public class AddSingle : IJudge.JudgeForSingle
     {
         Complex_Operation CO = new Complex_Operation();
+        
         Equals eq = new Equals();
         AddSymbol sy = new AddSymbol();
 
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
         {
+            Cache.count++;
             Cache.judgeTurn = true;
+            Cache.judgeNewInp = true;
             Cache.operatorCacheOld = Cache.operatorCacheNew;
+            if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
+            {
+                Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
+                Cache.resultCache = "";
+                Cache.operatorCacheOld = "";
+                Cache.judgeEqual = false;
+            }
             switch (single)
             {
                 
@@ -161,7 +172,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         if (!Cache.judgeSinge)
                         {
                            
-                            Cache.topCache += ("negate(" + Cache.underCache + ")");
+                            Cache.topCache += ("negate(" + MainWindowsViewModel._disPlayTextUnder + ")");
                             Cache.underCache = CO.Minus(Cache.underCache);
                             Cache.judgeSinge = true;
                         
@@ -344,6 +355,8 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     break;
                     #endregion
             }
+            Cache.underCache = AddFormat.Addformat(Cache.underCache);
+            Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
             return Cache.topCache;
 
         }

@@ -14,6 +14,7 @@ namespace Memory
         public void MSChange(string num)
         {
             mymemory.Add(num);
+            Cache.judgeNewInp = true;
         }
         public List<string> GetMemory()
         {
@@ -28,25 +29,25 @@ namespace Memory
         {
             if(mymemory.Count == 0)
             {
-                mymemory.Add("0");
+                mymemory.Add(num);
             }
             else
             {
                 mymemory[mymemory.Count - 1] = (Convert.ToDecimal(mymemory.Last()) - Convert.ToDecimal(num)).ToString();
             }
-
+            Cache.judgeNewInp = true;
         }
         public void MSPlus(string num)
         {
             if (mymemory.Count == 0)
             {
-                mymemory.Add("0");
+                mymemory.Add(num);
             }
             else
             {
                 mymemory[mymemory.Count - 1] = (Convert.ToDecimal(mymemory.Last()) + Convert.ToDecimal(num)).ToString();
             }
-
+            Cache.judgeNewInp = true;
         }
         public void MSUse()
         {

@@ -11,6 +11,7 @@ using WPFMVVMDemo.ViewModel;
 using Infrastructure;
 using Memory;
 using System.Collections.ObjectModel;
+using WPFMVVMDemo.ViewModel.FactoryFormat;
 
 namespace WPFMVVMDemo.ViewModel
 {
@@ -261,76 +262,85 @@ namespace WPFMVVMDemo.ViewModel
         private void AddHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("＋");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
 
         private void SubtractHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("－");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
 
         private void MultiplyHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("×");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
 
         private void DivideHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("÷");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
 
         //添加添加0-9数字的方法
         private void Num1Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("1"));
-            //Console.WriteLine(_disPlayTextUnder);
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num2Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("2"));
+            DisPlayTextTop = Cache.topCache;
         }
         private void Num3Handler()
         {
 
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("3"));
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num4Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("4"));
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num5Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("5"));
+            DisPlayTextTop = Cache.topCache;
         }
         private void Num6Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("6"));
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num7Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("7"));
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num8Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("8"));
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num9Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("9"));
+            DisPlayTextTop = Cache.topCache;
 
         }
         private void Num0Handler()
         {
             DisPlayTextUnder = AddComma.Addcomma(addNum0.JudgeZero());
+            DisPlayTextTop = Cache.topCache;
         }
         private void PercentOneHandler()//%
         {
@@ -371,6 +381,7 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;
             Cache.judgeMinus = true;
+            Cache.count = 0;
 
         }
         private void ClearPreHandler()
@@ -399,34 +410,103 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void EqualsHandler()
         {
-            DisPlayTextUnder = eq.getResult();
+
+            DisPlayTextUnder = AddFormat.Addformat(eq.getResult());
             if ("".Equals(Cache.operatorCacheNew))
+
             {
-                his.AddHistory(DisPlayTextUnder + "=" + DisPlayTextUnder);
-                History.Clear();
-                foreach (var item in his.GetHistory())
-
+                if ("".Equals(Cache.underCache))
                 {
-                    History.Insert(0, item);
-
+                    his.AddHistory("0" + "=" + "0");
+                    History.Clear();
+                    foreach (var item in his.GetHistory())
+                    {
+                        History.Insert(0, item);
+                    }
                 }
+                else
+                {
+                    
+                    if (Cache.judgeSinge)
+                    {
+                        his.AddHistory(Cache.topCache + "=" + Cache.underCache);
+                        History.Clear();
+                        foreach (var item in his.GetHistory())
+                        {
+                            History.Insert(0, item);
+                        }
+                        Cache.judgeSinge = false;
+                       
+                    }
+                    else
+                    {
+                        his.AddHistory(DisPlayTextUnder + "=" + DisPlayTextUnder);
+                        History.Clear();
+                        foreach (var item in his.GetHistory())
+                        {
+                        History.Insert(0, item);
+                        }
+                    }
+                    
+                    
+                }   
             }
             else
             {
-                his.AddHistory(DisPlayTextTop + Cache.underCache + "=" + DisPlayTextUnder);
-                History.Clear();
-                foreach (var item in his.GetHistory())
-
+                if (!"".Equals(DisPlayTextTop))
                 {
-                    History.Insert(0, item);
-
+                    if (Cache.count>1)
+                    {
+                        his.AddHistory(Cache.topCache + "=" + DisPlayTextUnder);
+                        History.Clear();
+                        foreach (var item in his.GetHistory())
+                        {
+                            History.Insert(0, item);
+                        }
+                        Cache.judgeSinge = false;
+                    }
+                    else
+                    {
+                        if (Cache.judgeTurn)
+                        {
+                            his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
+                        }
+                        else
+                        {
+                            his.AddHistory(DisPlayTextTop + Cache.underCache + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
+                        }
+                        
+                    }
                 }
+                else
+                {
+                    string stri = (Convert.ToDecimal(Cache.resultCache) - Convert.ToDecimal(Cache.underCache)).ToString();
+                    his.AddHistory(stri + "+" + Cache.underCache + "=" + DisPlayTextUnder);
+                    History.Clear();
+                    foreach (var item in his.GetHistory())
+                    {
+                        History.Insert(0, item);
+                    }
+                }
+                
+                
             }
 
-
             DisPlayTextTop = "";
-
             Cache.topCache = "";
+            Cache.judgeEqual = true;
+            Cache.judgeTurn = true;
+            Cache.judgeNewInp = true;
 
         }
         private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };

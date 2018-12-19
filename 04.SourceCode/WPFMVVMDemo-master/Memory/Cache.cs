@@ -29,6 +29,8 @@ namespace Memory
         public static bool judgeEqual = false;
         //判断是否正负过
         public static bool judgeMinus = true;
+        //判断进行过单目运算的次数
+        public static Int32 count = 0;
         
     }
 }

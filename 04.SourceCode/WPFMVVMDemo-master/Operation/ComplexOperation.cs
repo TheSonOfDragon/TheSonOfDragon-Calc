@@ -22,8 +22,8 @@ namespace Operation
                 lastX = x;
             }
             return x.ToString();
-
             */
+         
             decimal x, y;
             x = 0;
             y = Convert.ToDecimal(num1) / 2;
@@ -33,6 +33,7 @@ namespace Operation
                 y = (x + Convert.ToDecimal(num1) / x) / 2;
             }
             return x.ToString();
+            
         }
         public string Squ(string num1)
         {
