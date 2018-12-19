@@ -1,123 +1,138 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.InteropServices;
+﻿using System.Windows;
+using MahApps.Metro.Controls;
 using WPFMVVMDemo.ViewModel;
-using System.Windows.Interop;
-using Memory;
-
-
+using System.Windows.Input;
+using System;
+using System.Windows.Controls;
 
 namespace WPFMVVMDemo.View
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    /// 
-    
-
-public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         MainWindowsViewModel Mv = new MainWindowsViewModel();
-
-#region 实现删除图标的静态方法
-        public static class IconHelper
-            {
-                [DllImport("user32.dll")]
-                static extern int GetWindowLong(IntPtr hwnd, int index);
-
-                [DllImport("user32.dll")]
-                static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
-
-                [DllImport("user32.dll")]
-                static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwndInsertAfter,
-                           int x, int y, int width, int height, uint flags);
-
-                [DllImport("user32.dll")]
-                static extern IntPtr SendMessage(IntPtr hwnd, uint msg,
-                           IntPtr wParam, IntPtr lParam);
-
-                const int GWL_EXSTYLE = -20;
-                const int WS_EX_DLGMODALFRAME = 0x0001;
-                const int SWP_NOSIZE = 0x0001;
-                const int SWP_NOMOVE = 0x0002;
-                const int SWP_NOZORDER = 0x0004;
-                const int SWP_FRAMECHANGED = 0x0020;
-                const uint WM_SETICON = 0x0080;
-
-                public static void RemoveIcon(Window window)
-                {
-                    //获取窗体的句柄
-                    IntPtr hwnd = new WindowInteropHelper(window).Handle;
-
-                    //改变窗体的样式
-                    int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-                    SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_DLGMODALFRAME);
-
-                    //更新窗口的非客户区，以反映变化
-                    SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE |
-                          SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
-                }
-            }
-            protected override void OnSourceInitialized(EventArgs e)
-            {
-                IconHelper.RemoveIcon(this);
-            }
-#endregion      
 
         public MainWindow()
         {
             InitializeComponent();
-
+            this.SizeChanged += new System.Windows.SizeChangedEventHandler(MainWindow_Resize);
             this.DataContext = new MainWindowsViewModel();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        #region 标题栏所有事件
+        /// <summary>
+        /// 关闭窗口
+        /// </summary>
+        private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
-            //添加listbox的拉动处理事件，当窗体宽度width<=x时，listbox为hidden,当宽体宽度width>x时，listbox为
-            //通过传入用于记录内存的list来在内存的listbox中通过Add()添加记录
-            Add();
-            //可以选取传入的不同的list通过button进行展现
+            this.Close();
+        }
 
-    }
-            //包装一个在listbox中添加记录的add()方法
-            public void Add()
+        /// <summary>
+        /// 窗口最小化
+        /// </summary>
+        private void Btn_min_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        /// 窗口最大化
+        /// </summary>
+        private void Btn_max_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
             {
-            //listhistroy.SelectedItems.ToString();
-            //listhistroy.Items.Add("list");
+                this.WindowState = WindowState.Normal;
             }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
 
+        /// <summary>
+        /// 窗口移动事件
+        /// </summary>
+        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        int i = 0;
+        /// <summary>
+        /// 鼠标双击事件
+        /// </summary>
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            i += 1;
+            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 300);
+            timer.Tick += (s, e1) => { timer.IsEnabled = false; i = 0; };
+            timer.IsEnabled = true;
+            if (i % 2 == 0)
+            {
+                timer.IsEnabled = false;
+                i = 0;
+                this.WindowState = (this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized);
+            }
+        }
+
+        #endregion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            listmemory.Visibility=Visibility.Hidden;
-            listhistory.Visibility = Visibility.Visible;
+            this.leftFlyout.Visibility = Visibility.Visible;
+            if (!this.leftFlyout.IsOpen)
+            {
+                this.leftFlyout.IsOpen = true;
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            listhistory.Visibility = Visibility.Hidden;
-            listmemory.Visibility = Visibility.Visible;
+            if (this.bottomFlyout.Visibility == Visibility.Visible)
+            {
+                this.bottomFlyout.Visibility = Visibility.Hidden;
+                this.bottomFlyout.IsOpen = false;
+            }
+            else
+            {
+                this.bottomFlyout.Visibility = Visibility.Visible;
+                this.bottomFlyout.IsOpen = true;
+            }
         }
 
-        private void BtMS(object sender, RoutedEventArgs e)
+        #region 设置拉动添加控件
+        HistoryRight historyRight = new HistoryRight();
+        ColumnDefinition col = new ColumnDefinition();
+        bool isSized = false;
+        private void MainWindow_Resize(object sender, System.EventArgs e)
         {
-
-
+            if (this.Width >= 700 && (!isSized))
+            {
+                Grid1.ColumnDefinitions.Add(col);
+                historyRight.Name = "historyRight";
+                Grid1.Children.Add(historyRight);
+                historyRight.SetValue(Grid.RowProperty, 0);
+                historyRight.SetValue(Grid.RowSpanProperty, 4);
+                historyRight.SetValue(Grid.ColumnProperty, 2);
+                col.Width = new GridLength(330);
+                isSized = true;
+            }
+            else if (isSized && this.Width < 700)
+            {
+                Grid1.ColumnDefinitions.RemoveAt(2);
+                Grid1.Children.Remove(historyRight);
+                isSized = false;
+            }
 
         }
+        #endregion
     }
-    
-
 }
