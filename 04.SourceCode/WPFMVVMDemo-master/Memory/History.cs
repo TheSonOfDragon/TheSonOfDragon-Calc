@@ -10,6 +10,7 @@ namespace Memory
 {
     //历史记录
     public class History
+
     {
 
         List<string> myhistory = new List<string>();
