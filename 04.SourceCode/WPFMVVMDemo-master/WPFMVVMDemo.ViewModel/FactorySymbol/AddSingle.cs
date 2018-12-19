@@ -12,27 +12,23 @@ namespace WPFMVVMDemo.ViewModel.Symbol
     {
         Complex_Operation CO = new Complex_Operation();
         AddSymbol sy = new AddSymbol();
+        
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
         {
-            Cache.underCache = AddFormat.Addformat(Cache.underCache);
             Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
             Cache.judgeTurn = true;
             Cache.operatorCacheOld = Cache.operatorCacheNew;
+            Cache.count++;
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
-                Cache.operatorCacheOld = "";
-                Cache.operatorCacheNew = "";
                 Cache.resultCache = "";
-                Cache.judgeTurn = true;
-                Cache.judgeSinge = false;
-                Cache.judgeEqual = false;
-                Cache.judgeMinus = true;
             }
             switch (single)
             {
                 case "√":
+
                     //1.什么都不输入的情况下
                     if ("".Equals(Cache.underCache))
                     {
@@ -229,7 +225,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     {
                         if ("".Equals(Cache.operatorCacheOld))
                         {
-                            Cache.topCache = "0";
+                            Cache.topCache = "";
                             Cache.underCache = "0";
                         }
                         else
@@ -301,7 +297,15 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     break;
             }
-            Cache.underCache = AddFormat.Addformat(Cache.underCache);
+            if (Cache.judgeEqual)
+            {
+                Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+                Cache.judgeTurn = true;
+                Cache.judgeSinge = false;
+                Cache.judgeEqual = false;
+                Cache.judgeMinus = true;
+            }
             return Cache.topCache;
 
         }

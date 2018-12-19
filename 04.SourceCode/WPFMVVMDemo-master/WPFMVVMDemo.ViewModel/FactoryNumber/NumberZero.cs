@@ -26,7 +26,7 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
             if (MainWindowsViewModel._disPlayTextTop != "")
             {
 
-                if (MainWindowsViewModel._disPlayTextTop.Last().ToString() == ")")
+                if (Cache.judgeSinge)
                 {
                     if (Cache.operatorCacheNew == "")
                     {

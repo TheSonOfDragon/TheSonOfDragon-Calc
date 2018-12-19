@@ -29,6 +29,7 @@ namespace Memory
         public static bool judgeEqual = false;
         //判断是否正负过
         public static bool judgeMinus = true;
+        public static Int32 count = 0;
         
     }
 }

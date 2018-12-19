@@ -69,7 +69,7 @@ namespace WPFMVVMDemo.ViewModel
                 }
 
             }
-            
+            Cache.resultCache = AddComma.Addcomma(Cache.resultCache);
                     return  Cache.resultCache;
         }
     }
