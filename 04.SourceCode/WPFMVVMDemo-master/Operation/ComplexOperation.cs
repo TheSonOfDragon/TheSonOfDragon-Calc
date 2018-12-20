@@ -23,6 +23,7 @@ namespace Operation
             }
             return x.ToString();
             */
+         
             decimal x, y;
             x = 0;
             y = Convert.ToDecimal(num1) / 2;
@@ -32,6 +33,7 @@ namespace Operation
                 y = (x + Convert.ToDecimal(num1) / x) / 2;
             }
             return x.ToString();
+            
         }
         public string Squ(string num1)
         {
@@ -49,9 +51,10 @@ namespace Operation
             }
             else
             {
-
-            return (1 / Convert.ToDecimal(num1)).ToString();
+                return (1 / Convert.ToDecimal(num1)).ToString();
             }
+           
+   
         }
         public string Minus(string num1)
         {

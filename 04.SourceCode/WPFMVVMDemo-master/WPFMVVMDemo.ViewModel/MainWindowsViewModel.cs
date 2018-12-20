@@ -11,14 +11,14 @@ using WPFMVVMDemo.ViewModel;
 using Infrastructure;
 using Memory;
 using System.Collections.ObjectModel;
-
+using WPFMVVMDemo.ViewModel.FactoryFormat;
 
 namespace WPFMVVMDemo.ViewModel
 {
     public class MainWindowsViewModel : NotifyObject
     {
         //指当前输出屏幕的所有内容 
-        public static string _disPlayTextUnder="0";
+        public static string _disPlayTextUnder = "0";
         public static string _disPlayTextTop = "";
         string stri;
 
@@ -28,10 +28,10 @@ namespace WPFMVVMDemo.ViewModel
         Symbol.AddOperator addOperator = new Symbol.AddOperator();
         Symbol.AddSymbol addSymbol = new Symbol.AddSymbol();
         Symbol.AddSingle addSingle = new Symbol.AddSingle();
-        Memory.Memory mem = new Memory.Memory();
-        Memory.History his = new Memory.History();
+        Memory.Memory myMemory = new Memory.Memory();
         Equals eq = new Equals();
-
+        History_Memory his = new History_Memory();
+        Memory.Memory mem = new Memory.Memory();
         public string DisPlayTextUnder
         {
             get
@@ -171,7 +171,7 @@ namespace WPFMVVMDemo.ViewModel
         private readonly NVCommand _clearAllCommand;
         public NVCommand ClearAllCommand
         {
-            
+
             get => _clearAllCommand;
         }
 
@@ -223,6 +223,11 @@ namespace WPFMVVMDemo.ViewModel
         {
             get => btn_plus;
         }
+        private readonly NVCommand btn_clearHistory;
+        public NVCommand Btn_clearHistory
+        {
+            get => btn_clearHistory;
+        }
         public MainWindowsViewModel()
         {
             _addCommand = new NVCommand(AddHandler);
@@ -255,24 +260,27 @@ namespace WPFMVVMDemo.ViewModel
             btn_mr = new NVCommand(MR);
             btn_minus = new NVCommand(MMinus);
             btn_plus = new NVCommand(MPlus);
+            btn_clearHistory = new NVCommand(ClearHistory);
+
+
         }
 
         private void AddHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("＋");
-            DisPlayTextUnder =AddFormat.Addformat(AddComma.Addcomma(Cache.underCache))   ;
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
-        
+
         private void SubtractHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("－");
             DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
-        
+
         private void MultiplyHandler()
         {
             DisPlayTextTop = addOperator.JudgeOperator("×");
-            DisPlayTextUnder =AddFormat.Addformat(AddComma.Addcomma(Cache.underCache))   ;
+            DisPlayTextUnder = AddFormat.Addformat(AddComma.Addcomma(Cache.underCache));
         }
 
         private void DivideHandler()
@@ -284,59 +292,69 @@ namespace WPFMVVMDemo.ViewModel
         //添加添加0-9数字的方法
         private void Num1Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("1"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("1"));
             DisPlayTextTop = Cache.topCache;
-            //Console.WriteLine(_disPlayTextUnder);
 
         }
         private void Num2Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("2"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("2"));
             DisPlayTextTop = Cache.topCache;
         }
         private void Num3Handler()
         {
 
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("3"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("3"));
             DisPlayTextTop = Cache.topCache;
 
         }
         private void Num4Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("4"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("4"));
             DisPlayTextTop = Cache.topCache;
 
         }
         private void Num5Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("5"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("5"));
             DisPlayTextTop = Cache.topCache;
         }
         private void Num6Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("6"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("6"));
             DisPlayTextTop = Cache.topCache;
 
         }
         private void Num7Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("7"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("7"));
             DisPlayTextTop = Cache.topCache;
 
         }
         private void Num8Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("8"))  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("8"));
             DisPlayTextTop = Cache.topCache;
+
         }
         private void Num9Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("9"))  ;
+            if (Cache.judgeSinge)
+            {
+                his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                History.Clear();
+                foreach (var item in his.GetHistory())
+                {
+                    History.Insert(0, item);
+                }
+            }
+            DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("9"));
             DisPlayTextTop = Cache.topCache;
+
         }
         private void Num0Handler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addNum0.JudgeZero())  ;
+            DisPlayTextUnder = AddComma.Addcomma(addNum0.JudgeZero());
             DisPlayTextTop = Cache.topCache;
         }
         private void PercentOneHandler()//%
@@ -347,25 +365,34 @@ namespace WPFMVVMDemo.ViewModel
         private void SquareHandler()//平方
         {
             DisPlayTextTop = addSingle.JudgeForSinge("x²");
-            DisPlayTextUnder =AddComma.Addcomma(Cache.underCache) ;
+            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
         private void InverseHandler()//相反数
         {
             DisPlayTextTop = addSingle.JudgeForSinge("±");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            Cache.judgeNewInp = false;
         }
         private void ReciprocalHandler()//倒数
         {
             DisPlayTextTop = addSingle.JudgeForSinge("1/x");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            if ("除数不能为零".Equals(Cache.underCache))
+            {
+                DisPlayTextUnder = Cache.underCache;
+            }
+            else
+            {
+                DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            }
+           
         }
         private void RadicalHandler()//根号
         {
             DisPlayTextTop = addSingle.JudgeForSinge("√");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
-
-        private void ClearAllHandler()//C键清空所有
+ 
+        private void ClearAllHandler()
         {
             Cache.topCache = "";
             Cache.underCache = "";
@@ -377,55 +404,50 @@ namespace WPFMVVMDemo.ViewModel
             Cache.judgeNewInp = false;
             Cache.judgeTurn = true;
             Cache.judgeSinge = false;
-            Cache.judgeEqual = false;
             Cache.judgeMinus = true;
             Cache.count = 0;
+
         }
-            #region CE
-        private void ClearPreHandler()//CE键退一步操作
+        private void ClearPreHandler()
         {
+            
             if (Cache.judgeSinge)
             {
-                Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.LastIndexOf(Cache.operatorCacheNew)+1);
-                DisPlayTextTop = Cache.topCache;
-                Cache.judgeSinge = false;
+                his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                History.Clear();
+                foreach (var item in his.GetHistory())
+
+                {
+                    History.Insert(0, item);
+
+                }
+                
             }
             DisPlayTextUnder = "0";
-            Cache.underCache = "0";
-            #endregion
+            Cache.underCache = "";
         }
-        private void DelHandler() //退格键 
+        private void DelHandler()
         {
-            if(Cache.judgeNewInp)
-            {
-            }
-            else if(!Cache.judgeTurn)
-            {
-
-            }
-            else
-            {
-
-
             if (Cache.underCache.Length > 1)
             {
-            Cache.underCache = Cache.underCache.Substring(0, Cache.underCache.Length - 1);
-                DisPlayTextUnder =AddComma.Addcomma(Cache.underCache) ;
+                Cache.underCache = Cache.underCache.Substring(0, Cache.underCache.Length - 1);
+                DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
             }
             else
             {
                 Cache.underCache = "0";
                 DisPlayTextUnder = Cache.underCache;
-            }
+                Cache.underCache = "";
             }
 
         }
         private void DotHandler()
         {
-            DisPlayTextUnder = AddComma.Addcomma(addDot.Judgefordot()) ;
+            DisPlayTextUnder = addDot.Judgefordot();
         }
-        private void EqualsHandler()//等于
+        private void EqualsHandler()
         {
+            
             DisPlayTextUnder = AddFormat.Addformat(eq.getResult());
             if ("".Equals(Cache.operatorCacheNew))
 
@@ -441,7 +463,7 @@ namespace WPFMVVMDemo.ViewModel
                 }
                 else
                 {
-
+                    
                     if (Cache.judgeSinge)
                     {
                         his.AddHistory(Cache.topCache + "=" + Cache.underCache);
@@ -451,7 +473,7 @@ namespace WPFMVVMDemo.ViewModel
                             History.Insert(0, item);
                         }
                         Cache.judgeSinge = false;
-
+                       
                     }
                     else
                     {
@@ -459,25 +481,53 @@ namespace WPFMVVMDemo.ViewModel
                         History.Clear();
                         foreach (var item in his.GetHistory())
                         {
-                            History.Insert(0, item);
+                        History.Insert(0, item);
                         }
                     }
-
-
-                }
+                    
+                    
+                }   
             }
             else
             {
                 if (!"".Equals(DisPlayTextTop))
                 {
-                    if (Cache.count > 1)
+                    if (Cache.count>1)
                     {
-                        his.AddHistory(Cache.topCache + "=" + DisPlayTextUnder);
-                        History.Clear();
-                        foreach (var item in his.GetHistory())
+                        if (!Cache.judgeNewInp)
                         {
-                            History.Insert(0, item);
+                            switch (Cache.operatorCacheNew)
+                            {
+                                case "＋":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) - Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                                case "－":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) + Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                                case "×":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) / Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                                case "÷":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                            }
+                            his.AddHistory(Cache.topCache + stri + Cache.underCache + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
                         }
+                        else
+                        {
+                            his.AddHistory(Cache.topCache + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
+                        }
+                        
                         Cache.judgeSinge = false;
                     }
                     else
@@ -505,7 +555,7 @@ namespace WPFMVVMDemo.ViewModel
                 }
                 else
                 {
-
+                    
                     switch (Cache.operatorCacheNew)
                     {
                         case "＋":
@@ -521,7 +571,7 @@ namespace WPFMVVMDemo.ViewModel
                             stri = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache)).ToString();
                             break;
                     }
-
+                    
                     his.AddHistory(stri + Cache.operatorCacheNew + Cache.underCache + "=" + DisPlayTextUnder);
                     History.Clear();
                     foreach (var item in his.GetHistory())
@@ -529,8 +579,8 @@ namespace WPFMVVMDemo.ViewModel
                         History.Insert(0, item);
                     }
                 }
-
-
+                
+                
             }
 
             DisPlayTextTop = "";
@@ -541,13 +591,13 @@ namespace WPFMVVMDemo.ViewModel
             Cache.count = 0;
 
         }
-        private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容" };
+        private ObservableCollection<string> _memory = new ObservableCollection<string> { "内存中没有内容                                       " };
         public ObservableCollection<string> Memory
         {
             get { return _memory; }
 
         }
-        private ObservableCollection<string> _history = new ObservableCollection<string> { "尚无历史记录" };
+        private ObservableCollection<string> _history = new ObservableCollection<string> { "尚无历史记录                                         " };
         public ObservableCollection<string> History
         {
             get { return _history; }
@@ -557,7 +607,6 @@ namespace WPFMVVMDemo.ViewModel
         {
             //his.AddStorage();
             mem.MSChange(DisPlayTextUnder);
-
             Memory.Clear();
             foreach (var item in mem.GetMemory())
 
@@ -602,6 +651,18 @@ namespace WPFMVVMDemo.ViewModel
 
             {
                 Memory.Insert(0, item);
+
+            }
+        }
+        private void ClearHistory()
+        {
+            his.clear();
+            History.Clear();
+            foreach (var item in his.GetHistory())
+
+            {
+
+                History.Insert(0, item);
 
             }
         }

@@ -123,16 +123,34 @@ namespace WPFMVVMDemo.View
                 historyRight.SetValue(Grid.RowSpanProperty, 4);
                 historyRight.SetValue(Grid.ColumnProperty, 2);
                 col.Width = new GridLength(330);
+                ShowMemory.Visibility = Visibility.Hidden;
                 isSized = true;
             }
             else if (isSized && this.Width < 700)
             {
                 Grid1.ColumnDefinitions.RemoveAt(2);
                 Grid1.Children.Remove(historyRight);
+                ShowMemory.Visibility = Visibility.Visible;
                 isSized = false;
             }
 
         }
+
+
+
         #endregion
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (text1.Text.Equals("除数不,能为零"))
+            {
+                mc.IsEnabled = false;
+                ms.IsEnabled = false;
+                mplus.IsEnabled = false;
+                mminus.IsEnabled = false;
+                mr.IsEnabled = false;
+                ShowMemory.IsEnabled = false;
+            }
+        }
     }
 }

@@ -17,6 +17,9 @@
                 <ResourceDictionary Source="./Dictionary/CloseButton.xaml"/>
                 <ResourceDictionary Source="./Dictionary/TitleButton.xaml"/>
                 <ResourceDictionary Source="./Dictionary/RHistoryMemoryButton.xaml"/>
+                <ResourceDictionary Source="./Dictionary/HistoryItem.xaml"/>
+                <ResourceDictionary Source="./Dictionary/SysColor.xaml"/>
+                <ResourceDictionary Source="./Dictionary/TrashButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

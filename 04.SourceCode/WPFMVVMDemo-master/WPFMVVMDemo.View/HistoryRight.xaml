@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFMVVMDemo.View"
-             mc:Ignorable="d" Height="438" Width="330" Background="#FFE6E6E6">
+             mc:Ignorable="d" MinHeight="438" MinWidth="330" Background="#FFE6E6E6">
     <Grid x:Name="HisGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="57"/>
@@ -17,35 +17,69 @@
                 <ColumnDefinition Width="86*"/>
                 <ColumnDefinition Width="158*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource HMButton}" Uid="历史记录" BorderBrush="{x:Null}" Background="#FFF0F0F0" Click="Button_Click"/>
-            <Button Style="{StaticResource HMButton}" Uid="内存" Grid.Column="1" BorderBrush="{x:Null}" Background="#FFF0F0F0" Click="Button_Click_1"/>
-
+            <Button Style="{StaticResource HMButton}" Uid="历史记录" BorderBrush="{x:Null}" Background="#FFF0F0F0" Click="Button_Click" Grid.ColumnSpan="2" Margin="0,0,86.2,9.8"/>
+            <Button Style="{StaticResource HMButton}" Uid="内存" BorderBrush="{x:Null}" Background="#FFF0F0F0" Click="Button_Click_1" Grid.ColumnSpan="2" Margin="83,0,0.2,9.8"/>
+            <Label x:Name="label1" Height="3" Background="#FF0078D7" Margin="12,37,9.8,16.8" Visibility="Visible"/>
+            <Label x:Name="label2" Height="3" Background="#FF0078D7" Margin="27,37,28.2,16.8" Grid.Column="1" Visibility="Hidden"/>
         </Grid>
 
         <Grid Grid.Row="1" x:Name="HistoryC">
             <Grid.RowDefinitions>
-                <RowDefinition Height="105*"/>
-                <RowDefinition Height="55"/>
+                <RowDefinition/>
+                <RowDefinition Height="47.6"/>
             </Grid.RowDefinitions>
-            <ListBox Background="#FFE6E6E6" x:Name="listbox1" ItemsSource="{Binding History}">
-
+            <ListBox Background="#FFE6E6E6" x:Name="listbox1" ItemsSource="{Binding History}" IsSynchronizedWithCurrentItem="True">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Right"
+                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                             TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Height" Value="60"></Setter>
+                        <Setter Property="FontSize" Value="20"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
-            <Button Content="1111" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-
+            <Button Style="{StaticResource TrashStyle}" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding Btn_clearHistory}">
+                <Image Source="./ImageSource/Trash.png" Stretch="Fill"/>
             </Button>
         </Grid>
 
         <Grid Grid.Row="1" x:Name="MemoryC">
             <Grid.RowDefinitions>
-                <RowDefinition Height="105*"/>
-                <RowDefinition Height="55"/>
+                <RowDefinition/>
+                <RowDefinition Height="47.6"/>
             </Grid.RowDefinitions>
-            <ListBox Background="#FFE6E6E6" x:Name="listbox2" ItemsSource="{Binding Memory}" >
-
+            <ListBox Background="#FFE6E6E6" x:Name="listbox2" ItemsSource="{Binding Memory}" IsSynchronizedWithCurrentItem="True">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Right"
+                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                             TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Height" Value="60"></Setter>
+                        <Setter Property="FontSize" Value="20"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
-            <Button Content="222222" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-
+            <Button Style="{StaticResource TrashStyle}" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding Btn_mc}">
+                <Image Source="./ImageSource/Trash.png" Stretch="Fill"/>
             </Button>
         </Grid>
+
     </Grid>
 </UserControl>

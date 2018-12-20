@@ -12,16 +12,16 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="Background" Value="#FFDCDBDB"></Setter>
-                            <Setter TargetName="border" Property="BorderBrush" Value="Black"></Setter>
-                            <Setter TargetName="border" Property="BorderThickness" Value="1"></Setter>
+                            <Setter TargetName="border" Property="BorderBrush" Value="gray"></Setter>
+                            <Setter TargetName="border" Property="BorderThickness" Value="0.5"></Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="False">
                             <Setter TargetName="border" Property="Background" Value="#FFFAFAFA"></Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="#FFA7B1B9"></Setter>
-                            <Setter TargetName="border" Property="BorderBrush" Value="Black"></Setter>
-                            <Setter TargetName="border" Property="BorderThickness" Value="1"></Setter>
+                            <Setter TargetName="border" Property="BorderBrush" Value="gray"></Setter>
+                            <Setter TargetName="border" Property="BorderThickness" Value="0.5"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -9,21 +9,23 @@ using System.Threading.Tasks;
 namespace Memory
 {
     //历史记录
-    public class History
-
+   public class History_Memory
     {
-
-        List<string> myhistory = new List<string>();
+        
+        List<string> history = new List<string>();
 
         public void AddHistory(string num)
         {
-            myhistory.Add(num);
+            history.Add(num);
         }
         public List<string> GetHistory()
         {
-            return myhistory;
+            return history;
         }
         public void Remove() { }
-        public void clear() { }
+        public void clear()
+        {
+            history.Clear();
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
     public class AddSymbol
     {
         //正负号，对Cache.underCache的值无变化，只改变大小
+       
         public string GetSymbol()
         {
             if (Cache.judgeMinus)

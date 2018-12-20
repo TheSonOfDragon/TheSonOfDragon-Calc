@@ -8,10 +8,11 @@ using Memory;
 
 
 namespace WPFMVVMDemo.ViewModel.AddNumber
+
 {
     public class NumberOneToNine : IJudge.JudgeForNumber
-    {
 
+    {
         public string Judgefornumber(string number)
         {
             if (Cache.judgeEqual)
@@ -23,13 +24,11 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
                 Cache.judgeSinge = false;
                 Cache.judgeEqual = false;
                 Cache.judgeMinus = true;
-
             }
             //单目后直接输入数字
             if (MainWindowsViewModel._disPlayTextTop != "")
             {
-
-                if (Cache.judgeSinge)
+                if (MainWindowsViewModel._disPlayTextTop.Last().ToString() == ")" || Cache.judgeSinge)
                 {
                     if (Cache.operatorCacheNew == "")
                     {
@@ -37,7 +36,7 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
                     }
                     else
                     {
-                    Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1);
+                        Cache.topCache = Cache.topCache.Substring(0, Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1);
                     }
                     Cache.underCache = "0";
                 }
@@ -47,7 +46,6 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
             Cache.judgeSinge = false;
             if (Cache.judgeNewInp)
             {
-
                 Cache.underCache = "";
                 Cache.judgeNewInp = false;
             }
@@ -59,5 +57,4 @@ namespace WPFMVVMDemo.ViewModel.AddNumber
             return Cache.underCache;
         }
     }
-
 }
