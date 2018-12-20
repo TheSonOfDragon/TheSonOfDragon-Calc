@@ -2,26 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WPFMVVMDemo.View.Dictionary">
 
-    <Style x:Key="MemoryStyle" TargetType="{x:Type Button}">
+    <Style x:Key="TrashStyle" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="{x:Type Button}">
-                    <Border x:Name="border" Background="Black">
+                    <Border x:Name="border">
                         <Label Content="{TemplateBinding Content}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#FFDADADA"></Setter>
-                            <Setter TargetName="border" Property="BorderBrush" Value="gray"></Setter>
-                            <Setter TargetName="border" Property="BorderThickness" Value="0.5"></Setter>
+                            <Setter TargetName="border" Property="Background" Value="#FFD4CFCF"></Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="False">
                             <Setter TargetName="border" Property="Background" Value="#FFE6E6E6"></Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#FFC6C6C6"></Setter>
-                            <Setter TargetName="border" Property="BorderBrush" Value="gray"></Setter>
-                            <Setter TargetName="border" Property="BorderThickness" Value="0.5"></Setter>
+                            <Setter TargetName="border" Property="Background" Value="#FFBEBABA"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

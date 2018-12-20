@@ -34,12 +34,16 @@ namespace WPFMVVMDemo.View
         {
             this.MemoryC.Visibility = Visibility.Hidden;
             this.HistoryC.Visibility = Visibility.Visible;
+            this.label2.Visibility = Visibility.Hidden;
+            this.label1.Visibility = Visibility.Visible;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.HistoryC.Visibility = Visibility.Hidden;
             this.MemoryC.Visibility = Visibility.Visible;
+            this.label1.Visibility = Visibility.Hidden;
+            this.label2.Visibility = Visibility.Visible;
         }
     }
 }

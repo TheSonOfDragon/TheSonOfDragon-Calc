@@ -58,7 +58,7 @@ namespace WPFMVVMDemo.ViewModel
                 return;
             if (integer.Contains("-"))
             {
-                integer = integer.Substring(1, integer.Length-1);
+                integer = integer.Substring(1, integer.Length - 1);
                 char[] strs = integer.ToCharArray();
                 List<char> list = new List<char>();
                 int len = strs.Length;
@@ -81,27 +81,28 @@ namespace WPFMVVMDemo.ViewModel
                 integer = string.Join("", list.ToArray());
                 integer = "-" + integer;
             }
-            else {
-            char[] strs = integer.ToCharArray();
-            List<char> list = new List<char>();
-            int len = strs.Length;
-            for (int i = 0; i < len; i++)
+            else
             {
-                list.Add(strs[i]);
-            }
-            int index = len / 3 - 1;
-            for (int i = 0; i <= index; i++)
-            {
-                if ((len % 3 == 0) && i == 0)
-                    continue;
-                if ((len % 3 == 0) && i != 0)
+                char[] strs = integer.ToCharArray();
+                List<char> list = new List<char>();
+                int len = strs.Length;
+                for (int i = 0; i < len; i++)
                 {
-                    list.Insert(i * 3 + i - 1, ',');
-                    continue;
+                    list.Add(strs[i]);
                 }
-                list.Insert(len % 3 + i * 3 + i, ',');
-            }
-            integer = string.Join("", list.ToArray());
+                int index = len / 3 - 1;
+                for (int i = 0; i <= index; i++)
+                {
+                    if ((len % 3 == 0) && i == 0)
+                        continue;
+                    if ((len % 3 == 0) && i != 0)
+                    {
+                        list.Insert(i * 3 + i - 1, ',');
+                        continue;
+                    }
+                    list.Insert(len % 3 + i * 3 + i, ',');
+                }
+                integer = string.Join("", list.ToArray());
             }
         }
     }
