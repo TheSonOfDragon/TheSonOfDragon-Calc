@@ -15,33 +15,33 @@ namespace WPFMVVMDemo.ViewModel
         public static string Addcomma(string underCache)
         {
             string integer;
-            if (Cache.underCache.Contains("-") && Cache.underCache.Contains(".") && Cache.underCache.Length >= 19)
+            if (underCache.Contains("-") && underCache.Contains(".") && underCache.Length >= 19)
             {
-                Cache.underCache = Cache.underCache.Substring(0, 19);
+                underCache = underCache.Substring(0, 19);
             }
-            else if (!Cache.underCache.Contains("-") && Cache.underCache.Contains(".") && Cache.underCache.Length >= 18)
+            else if (!underCache.Contains("-") && underCache.Contains(".") && underCache.Length >= 16)
             {
-                Cache.underCache = Cache.underCache.Substring(0, 18);
+                underCache = underCache.Substring(0, 16);
             }
-            else if (Cache.underCache.Contains("-") && !Cache.underCache.Contains(".") && Cache.underCache.Length >= 17)
+            else if (underCache.Contains("-") && !underCache.Contains(".") && underCache.Length >= 17)
             {
-                Cache.underCache = Cache.underCache.Substring(0, 17);
+                underCache = underCache.Substring(0, 17);
             }
-            else if (!Cache.underCache.Contains("-") && !Cache.underCache.Contains(".") && Cache.underCache.Length >= 16)
+            else if (!underCache.Contains("-") && !underCache.Contains(".") && underCache.Length >= 16)
             {
-                Cache.underCache = Cache.underCache.Substring(0, 16);
+                underCache = underCache.Substring(0, 16);
             }
 
-            if (Cache.underCache.Contains("."))
+            if (underCache.Contains("."))
             {
                 //判断是否有小数点，只取整数部分
-                integer = Cache.underCache.Substring(0, Cache.underCache.IndexOf("."));
+                integer = underCache.Substring(0, underCache.IndexOf("."));
                 CommaIndex(ref integer);
-                return integer + Cache.underCache.Substring(Cache.underCache.IndexOf("."));
+                return integer + underCache.Substring(underCache.IndexOf("."));
             }
             else
             {
-                integer = Cache.underCache;
+                integer = underCache;
                 CommaIndex(ref integer);
                 return integer;
             }
@@ -56,27 +56,54 @@ namespace WPFMVVMDemo.ViewModel
             //整数部分3个以下不需要加逗号
             if (integer.Length <= 3)
                 return;
-
-            char[] strs = integer.ToCharArray();
-            List<char> list = new List<char>();
-            int len = strs.Length;
-            for (int i = 0; i < len; i++)
+            if (integer.Contains("-"))
             {
-                list.Add(strs[i]);
-            }
-            int index = len / 3 - 1;
-            for (int i = 0; i <= index; i++)
-            {
-                if ((len % 3 == 0) && i == 0)
-                    continue;
-                if ((len % 3 == 0) && i != 0)
+                integer = integer.Substring(1, integer.Length - 1);
+                char[] strs = integer.ToCharArray();
+                List<char> list = new List<char>();
+                int len = strs.Length;
+                for (int i = 0; i < len; i++)
                 {
-                    list.Insert(i * 3 + i - 1, ',');
-                    continue;
+                    list.Add(strs[i]);
                 }
-                list.Insert(len % 3 + i * 3 + i, ',');
+                int index = len / 3 - 1;
+                for (int i = 0; i <= index; i++)
+                {
+                    if ((len % 3 == 0) && i == 0)
+                        continue;
+                    if ((len % 3 == 0) && i != 0)
+                    {
+                        list.Insert(i * 3 + i - 1, ',');
+                        continue;
+                    }
+                    list.Insert(len % 3 + i * 3 + i, ',');
+                }
+                integer = string.Join("", list.ToArray());
+                integer = "-" + integer;
             }
-            integer = string.Join("", list.ToArray());
+            else
+            {
+                char[] strs = integer.ToCharArray();
+                List<char> list = new List<char>();
+                int len = strs.Length;
+                for (int i = 0; i < len; i++)
+                {
+                    list.Add(strs[i]);
+                }
+                int index = len / 3 - 1;
+                for (int i = 0; i <= index; i++)
+                {
+                    if ((len % 3 == 0) && i == 0)
+                        continue;
+                    if ((len % 3 == 0) && i != 0)
+                    {
+                        list.Insert(i * 3 + i - 1, ',');
+                        continue;
+                    }
+                    list.Insert(len % 3 + i * 3 + i, ',');
+                }
+                integer = string.Join("", list.ToArray());
+            }
         }
     }
 }

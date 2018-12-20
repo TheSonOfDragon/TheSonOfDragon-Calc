@@ -5,30 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using Memory;
 using Operation;
+using WPFMVVMDemo.ViewModel.FactoryFormat;
 
 namespace WPFMVVMDemo.ViewModel.Symbol
 {
     public class AddSingle : IJudge.JudgeForSingle
     {
         Complex_Operation CO = new Complex_Operation();
+        
+        Equals eq = new Equals();
         AddSymbol sy = new AddSymbol();
+
         //添加单目符号，并进行运算
         public string JudgeForSinge(string single)
         {
-            Cache.underCache = AddFormat.Addformat(Cache.underCache);
-            Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
+            Cache.count++;
             Cache.judgeTurn = true;
+            
             Cache.operatorCacheOld = Cache.operatorCacheNew;
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
                 Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
-                Cache.resultCache = "";
-                Cache.operatorCacheOld = "";
-                Cache.judgeEqual = false;
+                //Cache.resultCache = "";
+                Cache.judgeTurn = true;
+                Cache.judgeSinge = false;
+                Cache.judgeMinus = true;
             }
             switch (single)
             {
+                
                 case "√":
+                    #region
                     //1.什么都不输入的情况下
                     if ("".Equals(Cache.underCache))
                     {
@@ -65,12 +72,12 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                 Cache.topCache = Cache.topCache.Substring(0, index) + ("√(" + str + ")");
                                 Cache.underCache = CO.Sqrt(Cache.underCache);
                             }
-
                         }
-
                     }
                     break;
+                #endregion
                 case "x²":
+                    #region
                     //1.什么都不输入的情况下
                     if ("".Equals(Cache.underCache))
                     {
@@ -112,7 +119,9 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     }
                     break;
+                #endregion
                 case "1/x":
+                    #region
                     //1.什么都不输入的情况下
                     if ("".Equals(Cache.underCache))
                     {
@@ -123,9 +132,10 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     //2.输入数的情况下
                     else if (!Cache.judgeSinge)
                     {
-                        Cache.topCache += ("1/(" + Cache.underCache + ")");
-                        Cache.underCache = CO.OneCent(Cache.underCache);
-                        Cache.judgeSinge = true;
+                            Cache.topCache += ("1/(" + Cache.underCache + ")");
+                            Cache.underCache = CO.OneCent(Cache.underCache);
+                            Cache.judgeSinge = true;
+                       
                     }
                     //3.Cache.judgeSinge为true即已经进行过单目运算的情况下
                     else
@@ -154,29 +164,35 @@ namespace WPFMVVMDemo.ViewModel.Symbol
 
                     }
                     break;
+                #endregion
                 case "±":
+                    #region
+                    //如果没有新的输入，最后输入的是运算符
                     if (Cache.judgeNewInp)
-                    {
 
+                    {
                         if (!Cache.judgeSinge)
                         {
-
-                            Cache.topCache += ("negate(" + Cache.underCache + ")");
-                            Cache.underCache = CO.Minus(Cache.underCache);
+                            Cache.topCache += ("negate(" + MainWindowsViewModel._disPlayTextUnder + ")");
+                            Cache.underCache = CO.Minus(MainWindowsViewModel._disPlayTextUnder);
                             Cache.judgeSinge = true;
-
                         }
                         else
                         {
-                            int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
-                            string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                            
+                                int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                            if (str == "")
+                            {
+                                str = MainWindowsViewModel._disPlayTextUnder;
+                            }
                             Cache.topCache = Cache.topCache.Substring(0, index) + ("negate(" + str + ")");
-                            Cache.underCache = CO.Minus(Cache.underCache);
+                                Cache.underCache = CO.Minus(Cache.underCache);
+                            
                         }
                     }
                     else
                     {
-
                         if ("".Equals(Cache.underCache))
                         {
                             if (!Cache.judgeSinge)
@@ -185,8 +201,6 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                 Cache.underCache = "0";
                                 Cache.judgeSinge = true;
                             }
-
-
                         }
                         else if (Cache.judgeSinge == true && "0".Equals(Cache.underCache))
                         {
@@ -209,16 +223,17 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                 {
                                     Cache.underCache = CO.Minus(Cache.underCache);
                                 }
-
                             }
-
                         }
-
                     }
                     break;
+                #endregion
                 case "%":
+                    #region
+                    //是否进行过等号运算
                     if (!Cache.judgeEqual)
                     {
+                        //是否进行过双目运算
                         if ("".Equals(Cache.operatorCacheOld))
                         {
                             Cache.topCache = "0";
@@ -226,13 +241,14 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         }
                         else
                         {
+                            //如果没有新的输入，数据加减乘除后直接进行百分号运算
                             if (Cache.judgeNewInp)
                             {
                                 if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
                                 {
                                     int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
                                     string str = Cache.topCache.Substring(0, index);
-                                    Cache.topCache = str + (Convert.ToDecimal(Cache.underCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.topCache = str+(Convert.ToDecimal(Cache.underCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
                                     Cache.underCache = (Convert.ToDecimal(Cache.underCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
                                     Cache.judgeSinge = true;
                                 }
@@ -245,13 +261,14 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                     Cache.judgeSinge = true;
                                 }
                             }
+                            //有新的输入，数据加减乘除数据之后进行百分号运算
                             else
                             {
                                 if ("＋".Equals(Cache.operatorCacheNew) || "－".Equals(Cache.operatorCacheNew))
                                 {
                                     int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
                                     string str = Cache.topCache.Substring(0, index);
-                                    Cache.topCache = str + (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.topCache =str + (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
                                     Cache.underCache = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache) / 100).ToString();
                                     Cache.judgeSinge = true;
                                 }
@@ -259,7 +276,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                                 {
                                     int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
                                     string str = Cache.topCache.Substring(0, index);
-                                    Cache.topCache = str + (Convert.ToDecimal(Cache.underCache) / 100).ToString();
+                                    Cache.topCache =str + (Convert.ToDecimal(Cache.underCache) / 100).ToString();
                                     Cache.underCache = (Convert.ToDecimal(Cache.underCache) / 100).ToString();
                                     Cache.judgeSinge = true;
                                 }
@@ -267,6 +284,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                         }
 
                     }
+                    //如果没有过等号运算
                     else
                     {
                         if ("".Equals(Cache.operatorCacheNew))
@@ -292,7 +310,61 @@ namespace WPFMVVMDemo.ViewModel.Symbol
                     }
 
                     break;
+                #endregion
+                case "x³":
+                    #region
+                    if ("".Equals(Cache.underCache))
+                    {
+                        Cache.topCache += ("sqr(" + "0" + ")");
+                        Cache.underCache = (CO.Squ("0"));
+                        Cache.judgeSinge = true;
+                    }
+                    //2.输入数的情况下
+                    else if (!Cache.judgeSinge)
+                    {
+                        Cache.topCache += ("cube(" + Cache.underCache + ")");
+                        Cache.underCache = CO.Cube(Cache.underCache);
+                        Cache.judgeSinge = true;
+                    }
+                    //3.Cache.judgeSinge为true即已经进行过单目运算的情况下
+                    else
+                    {
+                        if ("".Equals(Cache.operatorCacheOld))
+                        {
+                            Cache.topCache = ("cube(" + Cache.topCache + ")");
+                            Cache.underCache = CO.Cube(Cache.underCache);
+                        }
+                        else
+                        {
+                            if (Cache.topCache.LastIndexOf(Cache.operatorCacheNew).Equals(Cache.topCache.Length - 1))
+                            {
+                                Cache.topCache += ("cube(" + Cache.resultCache + ")");
+                                Cache.underCache = CO.Cube(Cache.underCache);
+                            }
+                            else
+                            {
+                                int index = Cache.topCache.LastIndexOf(Cache.operatorCacheNew) + 1;
+                                string str = Cache.topCache.Substring(index, Cache.topCache.Length - index);
+                                Cache.topCache = Cache.topCache.Substring(0, index) + ("cube(" + str + ")");
+                                Cache.underCache = CO.Cube(Cache.underCache);
+                            }
+
+                        }
+
+                    }
+                    break;
+                    #endregion
             }
+            //Cache.underCache = AddFormat.Addformat(Cache.underCache);
+            //Cache.resultCache = AddFormat.Addformat(Cache.resultCache);
+            if (Cache.judgeEqual)
+            {
+                Cache.judgeEqual = false;
+                Cache.judgeNewInp = true;
+                Cache.operatorCacheOld = "";
+                Cache.operatorCacheNew = "";
+            }
+            Cache.judgeNewInp = true;
             return Cache.topCache;
 
         }

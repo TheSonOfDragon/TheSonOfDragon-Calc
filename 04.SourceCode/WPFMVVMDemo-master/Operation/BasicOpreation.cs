@@ -10,30 +10,31 @@ namespace Operation
     //二元运算
     public class Basic_Opreation
     {
-        public Double Add(string num1, string num2)
-        {
-            return Convert.ToDouble(num1) + Convert.ToDouble(num2);
-
-        }
-        public Double Sub(string num1, string num2)
+        public string Add(string num1, string num2)
         {
             
-            return Convert.ToDouble(num1) - Convert.ToDouble(num2);
+            return (Convert.ToDecimal(num1) + Convert.ToDecimal(num2)).ToString();
+
         }
-        public Double Mul(string num1, string num2)
+        public string Sub(string num1, string num2)
         {
-            return Convert.ToDouble(num1) * Convert.ToDouble(num2);
+            
+            return (Convert.ToDecimal(num1) - Convert.ToDecimal(num2)).ToString();
         }
-        public Double Div(string num1, string num2)
+        public string  Mul(string num1, string num2)
+        {
+            return (Convert.ToDecimal(num1) * Convert.ToDecimal(num2)).ToString();
+        }
+        public string Div(string num1, string num2)
         {
             
 
             if (num2 == "0")
             {
-                Cache.topCache = "除数不能为零";
+                return "除数不能为零";
 
             }
-                return Convert.ToDouble(num1) / Convert.ToDouble(num2);
+                return (Convert.ToDecimal(num1) / Convert.ToDecimal(num2)).ToString();
 
             
         }

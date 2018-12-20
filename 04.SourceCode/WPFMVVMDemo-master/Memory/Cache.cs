@@ -25,9 +25,12 @@ namespace Memory
         public static bool judgeTurn = true;
         //是否是对结果单目运算
         public static bool judgeSinge = false;
-        //判断是否按过等于
+        //判断是否进行过等于
         public static bool judgeEqual = false;
         //判断是否正负过
         public static bool judgeMinus = true;
+        //判断进行过单目运算的次数
+        public static Int32 count = 0;
+        
     }
 }
