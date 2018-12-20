@@ -31,7 +31,7 @@ namespace Operation
 
             if (num2 == "0")
             {
-                Cache.topCache = "除数不能为零";
+                return "除数不能为零";
 
             }
                 return (Convert.ToDecimal(num1) / Convert.ToDecimal(num2)).ToString();

@@ -12,7 +12,7 @@ namespace WPFMVVMDemo.ViewModel.FactoryFormat
         public static string Addformat(string temp)
 
         {
-
+            
             if (temp.Contains("."))
 
             {

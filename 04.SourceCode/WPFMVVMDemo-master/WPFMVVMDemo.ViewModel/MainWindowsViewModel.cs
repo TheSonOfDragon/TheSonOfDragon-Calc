@@ -223,6 +223,11 @@ namespace WPFMVVMDemo.ViewModel
         {
             get => btn_plus;
         }
+        private readonly NVCommand btn_clearHistory;
+        public NVCommand Btn_clearHistory
+        {
+            get => btn_clearHistory;
+        }
         public MainWindowsViewModel()
         {
             _addCommand = new NVCommand(AddHandler);
@@ -255,6 +260,7 @@ namespace WPFMVVMDemo.ViewModel
             btn_mr = new NVCommand(MR);
             btn_minus = new NVCommand(MMinus);
             btn_plus = new NVCommand(MPlus);
+            btn_clearHistory = new NVCommand(ClearHistory);
 
 
         }
@@ -333,6 +339,15 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void Num9Handler()
         {
+            if (Cache.judgeSinge)
+            {
+                his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                History.Clear();
+                foreach (var item in his.GetHistory())
+                {
+                    History.Insert(0, item);
+                }
+            }
             DisPlayTextUnder = AddComma.Addcomma(addNum.Judgefornumber("9"));
             DisPlayTextTop = Cache.topCache;
 
@@ -356,18 +371,27 @@ namespace WPFMVVMDemo.ViewModel
         {
             DisPlayTextTop = addSingle.JudgeForSinge("±");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            Cache.judgeNewInp = false;
         }
         private void ReciprocalHandler()//倒数
         {
             DisPlayTextTop = addSingle.JudgeForSinge("1/x");
-            DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            if ("除数不能为零".Equals(Cache.underCache))
+            {
+                DisPlayTextUnder = Cache.underCache;
+            }
+            else
+            {
+                DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
+            }
+           
         }
         private void RadicalHandler()//根号
         {
             DisPlayTextTop = addSingle.JudgeForSinge("√");
             DisPlayTextUnder = AddComma.Addcomma(Cache.underCache);
         }
-
+ 
         private void ClearAllHandler()
         {
             Cache.topCache = "";
@@ -386,6 +410,19 @@ namespace WPFMVVMDemo.ViewModel
         }
         private void ClearPreHandler()
         {
+            
+            if (Cache.judgeSinge)
+            {
+                his.AddHistory(DisPlayTextTop + "=" + DisPlayTextUnder);
+                History.Clear();
+                foreach (var item in his.GetHistory())
+
+                {
+                    History.Insert(0, item);
+
+                }
+                
+            }
             DisPlayTextUnder = "0";
             Cache.underCache = "";
         }
@@ -457,12 +494,40 @@ namespace WPFMVVMDemo.ViewModel
                 {
                     if (Cache.count>1)
                     {
-                        his.AddHistory(Cache.topCache + "=" + DisPlayTextUnder);
-                        History.Clear();
-                        foreach (var item in his.GetHistory())
+                        if (!Cache.judgeNewInp)
                         {
-                            History.Insert(0, item);
+                            switch (Cache.operatorCacheNew)
+                            {
+                                case "＋":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) - Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                                case "－":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) + Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                                case "×":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) / Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                                case "÷":
+                                    stri = (Convert.ToDecimal(Cache.resultCache) * Convert.ToDecimal(Cache.underCache)).ToString();
+                                    break;
+                            }
+                            his.AddHistory(Cache.topCache + stri + Cache.underCache + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
                         }
+                        else
+                        {
+                            his.AddHistory(Cache.topCache + "=" + DisPlayTextUnder);
+                            History.Clear();
+                            foreach (var item in his.GetHistory())
+                            {
+                                History.Insert(0, item);
+                            }
+                        }
+                        
                         Cache.judgeSinge = false;
                     }
                     else
@@ -542,7 +607,6 @@ namespace WPFMVVMDemo.ViewModel
         {
             //his.AddStorage();
             mem.MSChange(DisPlayTextUnder);
-
             Memory.Clear();
             foreach (var item in mem.GetMemory())
 
@@ -590,7 +654,18 @@ namespace WPFMVVMDemo.ViewModel
 
             }
         }
-        
+        private void ClearHistory()
+        {
+            his.clear();
+            History.Clear();
+            foreach (var item in his.GetHistory())
+
+            {
+
+                History.Insert(0, item);
+
+            }
+        }
 
     }
 }

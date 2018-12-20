@@ -19,7 +19,7 @@ namespace WPFMVVMDemo.ViewModel.Symbol
             Cache.judgeNewInp = true;//输入符号后，数字肯定是新输入
             if (Cache.judgeEqual)//按过＝运算，赋值结果给underCache
             {
-                Cache.underCache = MainWindowsViewModel._disPlayTextUnder;
+                Cache.underCache = Cache.resultCache;
                 Cache.operatorCacheOld = "";
                 Cache.resultCache = "";
             }

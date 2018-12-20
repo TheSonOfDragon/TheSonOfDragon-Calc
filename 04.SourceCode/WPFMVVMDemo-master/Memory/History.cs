@@ -23,6 +23,9 @@ namespace Memory
             return history;
         }
         public void Remove() { }
-        public void clear() { }
+        public void clear()
+        {
+            history.Clear();
+        }
     }
 }
