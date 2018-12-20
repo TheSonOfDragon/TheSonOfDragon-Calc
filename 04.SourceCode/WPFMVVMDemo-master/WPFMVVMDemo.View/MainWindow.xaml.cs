@@ -137,8 +137,20 @@ namespace WPFMVVMDemo.View
         }
 
 
+
         #endregion
 
-        
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (text1.Text.Equals("除数不,能为零"))
+            {
+                mc.IsEnabled = false;
+                ms.IsEnabled = false;
+                mplus.IsEnabled = false;
+                mminus.IsEnabled = false;
+                mr.IsEnabled = false;
+                ShowMemory.IsEnabled = false;
+            }
+        }
     }
 }
