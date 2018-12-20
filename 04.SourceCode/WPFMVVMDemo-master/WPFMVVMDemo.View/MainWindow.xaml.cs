@@ -46,10 +46,12 @@ namespace WPFMVVMDemo.View
             if (this.WindowState == WindowState.Maximized)
             {
                 this.WindowState = WindowState.Normal;
+                btn_max.Content = "£";
             }
             else
             {
                 this.WindowState = WindowState.Maximized;
+                btn_max.Content = "+";
             }
         }
 
@@ -152,5 +154,6 @@ namespace WPFMVVMDemo.View
                 ShowMemory.IsEnabled = false;
             }
         }
+        
     }
 }
